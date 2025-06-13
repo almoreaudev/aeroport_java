@@ -3,6 +3,8 @@ package models;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vol {
     private int idVol;
@@ -16,8 +18,10 @@ public class Vol {
     private CategorieVol codeTypeVol;
     private int codeAeroportDepart;
     private int codeAeroportArrive;
+    private List<Personnel> equipage = new ArrayList<Personnel>();
+    private List<Repas> repasList = new ArrayList<Repas>();
 
-    public Vol(int idVol, String dateDepart, String dateArrive, double distance, String statut, int carburantNecessaire, String duree, int idAvion, CategorieVol codeTypeVol, int codeAeroportDepart, int codeAeroportArrive) {
+    public Vol(int idVol, String dateDepart, String dateArrive, double distance, String statut, int carburantNecessaire, String duree, int idAvion, CategorieVol codeTypeVol, int codeAeroportDepart, int codeAeroportArrive, List<Personnel> equipage, List<Repas> repasList) {
         this.idVol = idVol;
         this.dateDepart = convertStringToDate(dateDepart);
         this.dateArrive = convertStringToDate(dateArrive);
@@ -29,6 +33,8 @@ public class Vol {
         this.codeTypeVol = codeTypeVol;
         this.codeAeroportDepart = codeAeroportDepart;
         this.codeAeroportArrive = codeAeroportArrive;
+        this.equipage = equipage;
+        this.repasList = repasList;
     }
 
     private LocalDate convertStringToDate(String strDate) {
