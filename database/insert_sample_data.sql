@@ -13,6 +13,10 @@ DELETE FROM TypeRepas;
 DELETE FROM CategorieVol;
 DELETE FROM Aeroport;
 DELETE FROM TypeAvion;
+DELETE FROM CategoriePassager;
+DELETE FROM Utilisateur;
+DELETE FROM Facture;
+DELETE FROM Billet;
 
 
 -- Insertion de données dans la table Type_Avion
@@ -149,3 +153,45 @@ INSERT INTO a_pour_escale (idVol, codeAeroport, dateArriveeEscale, dateDepartEsc
 (5, 'DXB', '2023-05-05 16:00:00', '2023-05-05 16:30:00'),
 (5, 'CDG', '2023-05-06 08:00:00', '2023-05-06 08:30:00'),
 (5, 'ORY', '2023-05-07 11:00:00', '2023-05-07 11:30:00');
+
+-- CategoriePassager
+INSERT INTO CategoriePassager (codeCategorie, libelle, tarif) VALUES
+('SENIOR', 'Sénior (65 ans et plus)', 100.00),
+('ADULTE', 'Adulte (25-64 ans inclus)', 150.00),
+('ETUDIANT', 'Etudiant (18-29 ans inclus)', 120.00),
+('JEUNE_ADULTE', 'Jeune adulte (18-24 ans inclus)', 110.00),
+('JEUNE', 'Jeune (12-17 ans inclus)', 90.00),
+('ENFANT', 'Enfant (2-11 ans inclus)', 50.00);
+
+-- Utilisateur 
+INSERT INTO Utilisateur (nom, prenom, email, motDePasse, adresse, numPasseport, numCarteIdentite) VALUES
+('Dupont', 'Alice', 'alice@gmail.com', 'password123', '123 Rue de Paris, Paris, France', 'P12345678', 'CI12345678'),
+('Martin', 'Bob', 'bob@free.fr', 'password456', '456 Avenue des Champs, Paris, France', 'P87654321', 'CI87654321'),
+('Durand', 'Charlie', 'charlie@gmail.com', 'password789', '789 Boulevard Saint-Germain, Paris, France', 'P11223344', 'CI11223344');
+
+-- Facture
+INSERT INTO Facture (idUtilisateur, dateFacture, montantTotal) VALUES
+(1, '2023-05-01 10:00:00', 200.00),
+(1, '2023-05-02 11:00:00', 250.00),
+(1, '2023-05-03 13:00:00', 300.00),
+(2, '2023-05-01 09:30:00', 150.00),
+(2, '2023-05-02 12:00:00', 300.00),
+(3, '2023-05-03 14:00:00', 150.00);
+
+-- Billet
+INSERT INTO Billet (idVol, idUtilisateur, idFacture, prixBillet, aAssurance) VALUES
+(1, 1, 1, 200.00, TRUE),
+(2, 1, 2, 250.00, FALSE),
+(3, 1, 3, 300.00, TRUE),
+(4, 2, 4, 150.00, FALSE),
+(5, 2, 5, 300.00, TRUE),
+(6, 3, 6, 150.00, FALSE);
+
+-- Passager
+INSERT INTO Passager (idBillet, nom, prenom, dateNaissance, numPasseport, codeCategorie) VALUES
+(1, 'Dupont', 'Alice', '1990-01-01', 'P12345678', 'ADULTE'),
+(2, 'Martin', 'Bob', '1985-02-02', 'P87654321', 'ADULTE'),
+(3, 'Durand', 'Charlie', '2000-03-03', 'P11223344', 'ETUDIANT'),
+(4, 'Dupont', 'David', '2010-04-04', 'P22334455', 'ENFANT'),
+(5, 'Martin', 'Eva', '2015-05-05', 'P33445566', 'ENFANT'),
+(6, 'Durand', 'Frank', '2005-06-06', 'P44556677', 'JEUNE');
