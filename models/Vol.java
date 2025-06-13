@@ -38,4 +38,92 @@ public class Vol {
         return date;
     }
 
+    public int getIdVol() {
+        return idVol;
+    }
+
+    public void setIdVol(int idVol) {
+        this.idVol = idVol;
+    }
+
+    public LocalDate getDateDepart() {
+        return dateDepart;
+    }
+
+    public void setDateDepart(LocalDate dateDepart) {
+        this.dateDepart = dateDepart;
+    }
+
+    public LocalDate getDateArrive() {
+        return dateArrive;
+    }
+
+    public void setDateArrive(LocalDate dateArrive) {
+        this.dateArrive = dateArrive;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+    public int getCarburantNecessaire() {
+        return carburantNecessaire;
+    }
+
+    public void setCarburantNecessaire(int carburantNecessaire) {
+        this.carburantNecessaire = carburantNecessaire;
+    }
+
+    public String getDuree() {
+        return duree;
+    }
+
+    public void setDuree(String duree) {
+        this.duree = duree;
+    }
+
+    public int getIdAvion() {
+        return idAvion;
+    }
+
+    public void setIdAvion(int idAvion) {
+        this.idAvion = idAvion;
+    }
+
+    public CategorieVol getCodeTypeVol() {
+        return codeTypeVol;
+    }
+
+    public void setCodeTypeVol(CategorieVol codeTypeVol) {
+        this.codeTypeVol = codeTypeVol;
+    }
+
+    public int getCodeAeroportDepart() {
+        return codeAeroportDepart;
+    }
+
+    public void setCodeAeroportDepart(int codeAeroportDepart) {
+        this.codeAeroportDepart = codeAeroportDepart;
+    }
+
+    public int getCodeAeroportArrive() {
+        return codeAeroportArrive;
+    }
+
+    public void setCodeAeroportArrive(int codeAeroportArrive) {
+        this.codeAeroportArrive = codeAeroportArrive;
+    }
+
 }
