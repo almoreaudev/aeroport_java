@@ -5,6 +5,9 @@ import utils.DatabaseConnection;
 import models.Vol;
 import models.CategorieVol;
 
+import models.Personnel;
+import dao.a_comme_equipageDAO;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,9 +48,18 @@ public class VolDAO {
             ResultSet rs = stmt.executeQuery(sql)) {
             System.out.println("Fetching all flights from the database...");
 
+            int i = 0;
             while (rs.next()) {
-                System.out.println("Processing flight ID: " + rs.getInt("idVol"));
-                vols.add(mapResultSetToVol(rs));
+                Vol vol = mapResultSetToVol(rs);
+                vols.add(vol);
+                if (i == 0) {
+                    System.out.println("First flight found: " + vol.getIdVol());
+                    // Lister l'equipage
+                    for (Personnel personnel : vol.getEquipage()) {
+                        System.out.println("Equipage: " + personnel.getNom() + " " + personnel.getPrenom());
+                    }
+                    i = 1;
+                }
             }
 
         } catch (SQLException e) {
@@ -89,8 +101,9 @@ public class VolDAO {
         String codeAeroportArrive = rs.getString("codeAeroportArrivee");
 
         CategorieVol codeTypeVol = CategorieVol.valueOf(codeTypeVolStr);
-        // Vol(int idVol, String dateDepart, String dateArrivee, double distance, String statut, int carburantNecessaire, String duree, int idAvion, CategorieVol codeTypeVol, int codeAeroportDepart, int codeAeroportArrive)
-        return new Vol(idVol, dateDepartStr, dateArriveeStr, distance, statut, carburantNecessaire, duree, idAvion, codeTypeVol, codeAeroportDepart, codeAeroportArrive);
+        List<Personnel> equipage = new a_comme_equipageDAO().getEquipageByVolId(idVol);
+
+        return new Vol(idVol, dateDepartStr, dateArriveeStr, distance, statut, carburantNecessaire, duree, idAvion, codeTypeVol, codeAeroportDepart, codeAeroportArrive, equipage, new ArrayList<>());
     }
 
     private String formatDate(Timestamp timestamp) {

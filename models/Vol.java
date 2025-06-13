@@ -132,4 +132,39 @@ public class Vol {
         this.codeAeroportArrive = codeAeroportArrive;
     }
 
+    public List<Personnel> getEquipage() {
+        return equipage;
+    }
+
+    public void setEquipage(List<Personnel> equipage) {
+        this.equipage = equipage;
+    }
+
+    public List<Repas> getRepasList() {
+        return repasList;
+    }
+
+    public void setRepasList(List<Repas> repasList) {
+        this.repasList = repasList;
+    }
+
+    @Override
+    public String toString() {
+        return "Vol{" +
+                "idVol=" + idVol +
+                ", dateDepart=" + dateDepart +
+                ", dateArrivee=" + dateArrivee +
+                ", distance=" + distance +
+                ", statut='" + statut + '\'' +
+                ", carburantNecessaire=" + carburantNecessaire +
+                ", duree='" + duree + '\'' +
+                ", idAvion=" + idAvion +
+                ", codeTypeVol=" + codeTypeVol +
+                ", codeAeroportDepart='" + codeAeroportDepart + '\'' +
+                ", codeAeroportArrive='" + codeAeroportArrive + '\'' +
+                ", equipage=" + equipage +
+                ", repasList=" + repasList +
+                '}';
+    }
+
 }
