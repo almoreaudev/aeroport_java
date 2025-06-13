@@ -15,3 +15,5 @@ CREATE TABLE IF NOT EXISTS vols (
     status VARCHAR(20) DEFAULT 'Scheduled',
     aircraft VARCHAR(50)
 );
+
+
