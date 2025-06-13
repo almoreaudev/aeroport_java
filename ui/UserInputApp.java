@@ -29,13 +29,6 @@ public class UserInputApp extends JFrame {
         // Action sur clic du bouton
         saveButton.addActionListener(e -> saveUser());
 
-        // Action à la fermeture : suppression du fichier
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                deleteConfigFile();
-                System.exit(0);
-            }
-        });
 
         loadUser(); // Charger si jamais une valeur existe
 
@@ -73,14 +66,5 @@ public class UserInputApp extends JFrame {
         }
     }
 
-    private void deleteConfigFile() {
-        File configFile = new File(CONFIG_FILE);
-        if (configFile.exists()) {
-            configFile.delete();
-        }
-    }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(UserInputApp::new);
-    }
 }
