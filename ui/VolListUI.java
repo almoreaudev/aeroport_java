@@ -33,23 +33,23 @@ public class VolListUI extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    private void loadFlights() {
+     private void loadFlights() {
         VolDAO volDAO = new VolDAO();
         List<Vol> vols = volDAO.getAllVols();
 
-        System.out.println("ojzhorzhgoezhozohfz");
-        System.out.println("Nombre de vols récupérés : " + vols.size());
-
         for (Vol vol : vols) {
             Object[] rowData = {
-                    vol.getId(),
-                    vol.getVolNumber(),
-                    vol.getDepartureAirport(),
-                    vol.getArrivalAirport(),
-                    vol.getDepartureTime(),
-                    vol.getArrivalTime(),
-                    vol.getStatus(),
-                    vol.getAircraft()
+                    vol.getIdVol(),
+                    vol.getDateDepart(),
+                    vol.getDateArrivee(),
+                    vol.getDistance(),
+                    vol.getStatut(),
+                    vol.getCarburantNecessaire(),
+                    vol.getDuree(),
+                    vol.getIdAvion(),
+                    vol.getCodeTypeVol(),
+                    vol.getCodeAeroportDepart(),
+                    vol.getCodeAeroportArrive()
             };
             tableModel.addRow(rowData);
         }

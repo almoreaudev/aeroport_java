@@ -7,20 +7,20 @@ import java.time.format.DateTimeFormatter;
 public class Vol {
     private int idVol;
     private LocalDate dateDepart;
-    private LocalDate dateArrive;
+    private LocalDate dateArrivee;
     private double distance;
     private String statut;
     private int carburantNecessaire;
     private String duree;
     private int idAvion;
     private CategorieVol codeTypeVol;
-    private int codeAeroportDepart;
-    private int codeAeroportArrive;
+    private String codeAeroportDepart;
+    private String codeAeroportArrive;
 
-    public Vol(int idVol, String dateDepart, String dateArrive, double distance, String statut, int carburantNecessaire, String duree, int idAvion, CategorieVol codeTypeVol, int codeAeroportDepart, int codeAeroportArrive) {
+    public Vol(int idVol, String dateDepart, String dateArrivee, double distance, String statut, int carburantNecessaire, String duree, int idAvion, CategorieVol codeTypeVol, String codeAeroportDepart, String codeAeroportArrive) {
         this.idVol = idVol;
         this.dateDepart = convertStringToDate(dateDepart);
-        this.dateArrive = convertStringToDate(dateArrive);
+        this.dateArrivee = convertStringToDate(dateArrivee);
         this.distance = distance;
         this.statut = statut;
         this.carburantNecessaire = carburantNecessaire;
@@ -54,12 +54,12 @@ public class Vol {
         this.dateDepart = dateDepart;
     }
 
-    public LocalDate getDateArrive() {
-        return dateArrive;
+    public LocalDate getDateArrivee() {
+        return dateArrivee;
     }
 
-    public void setDateArrive(LocalDate dateArrive) {
-        this.dateArrive = dateArrive;
+    public void setDateArrivee(LocalDate dateArrivee) {
+        this.dateArrivee = dateArrivee;
     }
 
     public double getDistance() {
@@ -110,19 +110,19 @@ public class Vol {
         this.codeTypeVol = codeTypeVol;
     }
 
-    public int getCodeAeroportDepart() {
+    public String getCodeAeroportDepart() {
         return codeAeroportDepart;
     }
 
-    public void setCodeAeroportDepart(int codeAeroportDepart) {
+    public void setCodeAeroportDepart(String codeAeroportDepart) {
         this.codeAeroportDepart = codeAeroportDepart;
     }
 
-    public int getCodeAeroportArrive() {
+    public String getCodeAeroportArrive() {
         return codeAeroportArrive;
     }
 
-    public void setCodeAeroportArrive(int codeAeroportArrive) {
+    public void setCodeAeroportArrive(String codeAeroportArrive) {
         this.codeAeroportArrive = codeAeroportArrive;
     }
 
