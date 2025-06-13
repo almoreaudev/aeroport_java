@@ -16,4 +16,11 @@ public enum CategorieVol {
         return categorie;
     }
 
+    @Override
+    public String toString() {
+        return "CategorieVol{" +
+                "categorie='" + categorie + '\'' +
+                '}';
+    }
+
 }

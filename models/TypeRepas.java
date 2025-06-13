@@ -17,4 +17,10 @@ public enum TypeRepas {
         return type;
     }
 
+    @Override
+    public String toString() {
+        return "TypeRepas{" +
+                "type='" + type + '\'' +
+                '}';
+    }
 }

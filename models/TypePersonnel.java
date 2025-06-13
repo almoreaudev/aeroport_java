@@ -17,4 +17,11 @@ public enum TypePersonnel {
     public String getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "TypePersonnel{" +
+                "type='" + type + '\'' +
+                '}';
+    }
 }

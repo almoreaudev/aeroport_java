@@ -26,4 +26,45 @@ public class Personnel {
         return date;
     }
 
+    public int getIdPersonnel() {
+        return idPersonnel;
+    }
+    public void setIdPersonnel(int idPersonnel) {
+        this.idPersonnel = idPersonnel;
+    }
+    public String getNom() {
+        return nom;
+    }
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+    public String getPrenom() {
+        return prenom;
+    }
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+    public LocalDate getDateNaissance() {
+        return dateNaissance;
+    }
+    public void setDateNaissance(LocalDate dateNaissance) {
+        this.dateNaissance = dateNaissance;
+    }
+    public TypePersonnel getCodeType() {
+        return codeType;
+    }
+    public void setCodeType(TypePersonnel codeType) {
+        this.codeType = codeType;
+    }
+    @Override
+    public String toString() {
+        return "Personnel{" +
+                "idPersonnel=" + idPersonnel +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", dateNaissance=" + dateNaissance +
+                ", codeType=" + codeType +
+                '}';
+    }
+
 }

@@ -16,4 +16,11 @@ public enum TypeAvion {
     public int getCapacite() {
         return capacite;
     }
+
+    @Override
+    public String toString() {
+        return "TypeAvion{" +
+                "capacite=" + capacite +
+                '}';
+    }
 }
