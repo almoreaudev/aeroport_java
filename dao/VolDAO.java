@@ -3,6 +3,7 @@ package dao;
 import utils.DatabaseConnection;
 
 import models.Vol;
+import models.Aeroport;
 import models.CategorieVol;
 
 import models.Personnel;
@@ -103,7 +104,14 @@ public class VolDAO {
         CategorieVol codeTypeVol = CategorieVol.valueOf(codeTypeVolStr);
         List<Personnel> equipage = new a_comme_equipageDAO().getEquipageByVolId(idVol);
 
-        return new Vol(idVol, dateDepartStr, dateArriveeStr, distance, statut, carburantNecessaire, duree, idAvion, codeTypeVol, codeAeroportDepart, codeAeroportArrive, equipage, new ArrayList<>());
+        Vol vol = new Vol(idVol, dateDepartStr, dateArriveeStr, distance, statut, carburantNecessaire, duree, idAvion, codeTypeVol, codeAeroportDepart, codeAeroportArrive, equipage, new ArrayList<>());
+        
+        Aeroport ad = new aeroportDAO().getAeroportByCode(codeAeroportDepart);
+        vol.setAeroportDepart(ad);
+        Aeroport aa = new aeroportDAO().getAeroportByCode(codeAeroportArrive);
+        vol.setAeroportArrive(aa);
+        
+        return vol;
     }
 
     private String formatDate(Timestamp timestamp) {

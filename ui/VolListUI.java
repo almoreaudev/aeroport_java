@@ -25,7 +25,8 @@ public class VolListUI extends JFrame {
 
     private void initComponents() {
         // Création du modèle de table
-        String[] columnNames = {"ID", "Numéro de vol", "Départ", "Arrivée", "Départ (heure)", "Arrivée (heure)", "Statut", "Avion"};
+        // String[] columnNames = {"ID", "Numéro de vol", "Départ", "Arrivée", "Départ (heure)", "Arrivée (heure)", "Statut", "Avion"};
+        String[] columnNames = {"Lieu de départ","Code Aéroport", "Lieu d'arrivée", "Code Aéroport"};
         tableModel = new DefaultTableModel(columnNames, 0);
         volTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(volTable);
@@ -39,17 +40,10 @@ public class VolListUI extends JFrame {
 
         for (Vol vol : vols) {
             Object[] rowData = {
-                    vol.getIdVol(),
-                    vol.getDateDepart(),
-                    vol.getDateArrivee(),
-                    vol.getDistance(),
-                    vol.getStatut(),
-                    vol.getCarburantNecessaire(),
-                    vol.getDuree(),
-                    vol.getIdAvion(),
-                    vol.getCodeTypeVol(),
-                    vol.getCodeAeroportDepart(),
-                    vol.getCodeAeroportArrive()
+                    vol.getAeroportArrive().getNom(),
+                    vol.getAeroportArrive().getCodeAeroport(),
+                    vol.getAeroportDepart().getNom(),
+                    vol.getAeroportDepart().getCodeAeroport()
             };
             tableModel.addRow(rowData);
         }

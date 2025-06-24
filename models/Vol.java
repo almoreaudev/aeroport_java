@@ -16,10 +16,15 @@ public class Vol {
     private String duree;
     private int idAvion;
     private CategorieVol codeTypeVol;
+    private Aeroport aeroportDepart;
+    private Aeroport aeroportArrive;
     private String codeAeroportDepart;
     private String codeAeroportArrive;
     private List<Personnel> equipage = new ArrayList<Personnel>();
     private List<Repas> repasList = new ArrayList<Repas>();
+
+    public Vol() {
+    }
 
     public Vol(int idVol, String dateDepart, String dateArrivee, double distance, String statut, int carburantNecessaire, String duree, int idAvion, CategorieVol codeTypeVol, String codeAeroportDepart, String codeAeroportArrive, List<Personnel> equipage, List<Repas> repasList) {
         this.idVol = idVol;
@@ -43,6 +48,23 @@ public class Vol {
 
         return date;
     }
+
+    public void setAeroportDepart (Aeroport a){
+        this.aeroportDepart = a;
+    }
+
+    public Aeroport getAeroportDepart() {
+        return aeroportDepart;
+    }
+
+    public void setAeroportArrive (Aeroport a){
+        this.aeroportArrive = a;
+    }
+
+    public Aeroport getAeroportArrive(){
+        return aeroportArrive;
+    }
+
 
     public int getIdVol() {
         return idVol;
