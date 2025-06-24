@@ -18,15 +18,13 @@ public class Vol {
     private CategorieVol codeTypeVol;
     private Aeroport aeroportDepart;
     private Aeroport aeroportArrive;
-    private String codeAeroportDepart;
-    private String codeAeroportArrive;
     private List<Personnel> equipage = new ArrayList<Personnel>();
     private List<Repas> repasList = new ArrayList<Repas>();
 
     public Vol() {
     }
 
-    public Vol(int idVol, String dateDepart, String dateArrivee, double distance, String statut, int carburantNecessaire, String duree, int idAvion, CategorieVol codeTypeVol, String codeAeroportDepart, String codeAeroportArrive, List<Personnel> equipage, List<Repas> repasList) {
+    public Vol(int idVol, String dateDepart, String dateArrivee, double distance, String statut, int carburantNecessaire, String duree, int idAvion, CategorieVol codeTypeVol, List<Personnel> equipage, List<Repas> repasList) {
         this.idVol = idVol;
         this.dateDepart = convertStringToDate(dateDepart);
         this.dateArrivee = convertStringToDate(dateArrivee);
@@ -36,8 +34,6 @@ public class Vol {
         this.duree = duree;
         this.idAvion = idAvion;
         this.codeTypeVol = codeTypeVol;
-        this.codeAeroportDepart = codeAeroportDepart;
-        this.codeAeroportArrive = codeAeroportArrive;
         this.equipage = equipage;
         this.repasList = repasList;
     }
@@ -138,21 +134,6 @@ public class Vol {
         this.codeTypeVol = codeTypeVol;
     }
 
-    public String getCodeAeroportDepart() {
-        return codeAeroportDepart;
-    }
-
-    public void setCodeAeroportDepart(String codeAeroportDepart) {
-        this.codeAeroportDepart = codeAeroportDepart;
-    }
-
-    public String getCodeAeroportArrive() {
-        return codeAeroportArrive;
-    }
-
-    public void setCodeAeroportArrive(String codeAeroportArrive) {
-        this.codeAeroportArrive = codeAeroportArrive;
-    }
 
     public List<Personnel> getEquipage() {
         return equipage;
@@ -182,9 +163,9 @@ public class Vol {
                 ", duree='" + duree + '\'' +
                 ", idAvion=" + idAvion +
                 ", codeTypeVol=" + codeTypeVol +
-                ", codeAeroportDepart='" + codeAeroportDepart + '\'' +
-                ", codeAeroportArrive='" + codeAeroportArrive + '\'' +
-                ", equipage=" + equipage +
+                ", aeroportDepart=" + aeroportDepart.toString() +
+                ", aeroportArrive=" + aeroportArrive.toString() +
+                ", equipage=" + equipage.toString() +
                 ", repasList=" + repasList +
                 '}';
     }

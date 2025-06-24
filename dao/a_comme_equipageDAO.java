@@ -41,7 +41,6 @@ public class a_comme_equipageDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return equipage;
     }
 
@@ -52,7 +51,8 @@ public class a_comme_equipageDAO {
         String dateNaissance = formatDate(rs.getTimestamp("dateNaissance"));
         TypePersonnel codeType = TypePersonnel.valueOf(rs.getString("codeType").toUpperCase());
 
-        return new Personnel(idPersonnel, nom, prenom, dateNaissance, codeType);
+        Personnel p = new Personnel(idPersonnel, nom, prenom, dateNaissance, codeType);
+        return p;
     }
 
     private String formatDate(Timestamp timestamp) {
