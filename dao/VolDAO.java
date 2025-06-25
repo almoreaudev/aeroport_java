@@ -1,11 +1,13 @@
 package dao;
 
 import utils.DatabaseConnection;
+import utils.DataFormater;
 
 import models.Vol;
 import models.A_pour_escale;
 import models.Aeroport;
 import models.CategorieVol;
+import models.Repas;
 
 import models.Personnel;
 import dao.a_comme_equipageDAO;
@@ -15,6 +17,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.text.DateFormatter;
 
 
 public class VolDAO {
@@ -82,8 +86,9 @@ public class VolDAO {
     // Mapping ResultSet -> Vol
     private Vol mapResultSetToVol(ResultSet rs) throws SQLException {
         int idVol = rs.getInt("idVol");
-        String dateDepartStr = formatDate(rs.getTimestamp("dateDepart"));
-        String dateArriveeStr = formatDate(rs.getTimestamp("dateArrivee"));
+        DataFormater dataFormater = new DataFormater();
+        String dateDepartStr = dataFormater.formatDate(rs.getTimestamp("dateDepart"));
+        String dateArriveeStr = dataFormater.formatDate(rs.getTimestamp("dateArrivee"));
         double distance = rs.getDouble("distance");
         String statut = rs.getString("statut");
         int carburantNecessaire = rs.getInt("carburantNecessaire");
@@ -98,6 +103,10 @@ public class VolDAO {
 
         Vol vol = new Vol(idVol, dateDepartStr, dateArriveeStr, distance, statut, carburantNecessaire, duree, idAvion, codeTypeVol, equipage, new ArrayList<>());
         
+        // Récupération des repas associés au vol
+        List<Repas> repasList = new RepasDAO().getRepasByIdVol(idVol);
+        vol.setRepasList(repasList);
+
         Aeroport ad = new aeroportDAO().getAeroportByCode(codeAeroportDepart);
         vol.setAeroportDepart(ad);
         Aeroport aa = new aeroportDAO().getAeroportByCode(codeAeroportArrive);
@@ -112,10 +121,5 @@ public class VolDAO {
         return vol;
     }
 
-    private String formatDate(Timestamp timestamp) {
-        LocalDate date = timestamp.toLocalDateTime().toLocalDate();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        return date.atStartOfDay().format(formatter);
-    }
 
 }

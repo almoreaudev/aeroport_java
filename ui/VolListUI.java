@@ -26,6 +26,7 @@ public class VolListUI extends JFrame {
     private String currentUser;
 
 
+
     public VolListUI() {
         setTitle("Liste des vols");
         setSize(1300, 500);
@@ -119,7 +120,7 @@ public class VolListUI extends JFrame {
         // ===========================
         // Tableau des vols
         // ===========================
-        String[] columnNames = {"Depart", "Arrive", "Direct", "Temps de voyage", "Temps de vol", "Escales", "Prix"};
+        String[] columnNames = {"Id", "Depart", "Arrive", "Direct", "Temps de voyage", "Temps de vol", "Escales", "Prix"};
         tableModel = new DefaultTableModel(columnNames, 0);
         volTable = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(volTable);
@@ -223,6 +224,7 @@ public class VolListUI extends JFrame {
             double distance = vol.getDistance();
             double prix = categoriePassager != null ? categoriePassager.getTarif() * distance / 100 : 100.0 * distance / 100; // Valeur par défaut si pas trouvé
             Object[] rowData = {
+                    vol.getIdVol(),
                     vol.getAeroportDepart().getCodeAeroport(),
                     vol.getAeroportArrive().getCodeAeroport(),
                     escaleText,

@@ -10,8 +10,8 @@ import utils.DataFormater;
 
 public class Vol {
     private int idVol;
-    private LocalDate dateDepart;
-    private LocalDate dateArrivee;
+    private String dateDepart;
+    private String dateArrivee;
     private double distance;
     private String statut;
     private int carburantNecessaire;
@@ -30,8 +30,8 @@ public class Vol {
 
     public Vol(int idVol, String dateDepart, String dateArrivee, double distance, String statut, int carburantNecessaire, String duree, int idAvion, CategorieVol codeTypeVol, List<Personnel> equipage, List<Repas> repasList) {
         this.idVol = idVol;
-        this.dateDepart = convertStringToDate(dateDepart);
-        this.dateArrivee = convertStringToDate(dateArrivee);
+        this.dateDepart = dateDepart;
+        this.dateArrivee = dateArrivee;
         this.distance = distance;
         this.statut = statut;
         this.carburantNecessaire = carburantNecessaire;
@@ -42,12 +42,7 @@ public class Vol {
         this.repasList = repasList;
     }
 
-    private LocalDate convertStringToDate(String strDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-        LocalDate date = LocalDate.parse(strDate, formatter);
 
-        return date;
-    }
 
     public void setEscales(List<Aeroport> escales) {
         this.escales = escales;
@@ -82,19 +77,19 @@ public class Vol {
         this.idVol = idVol;
     }
 
-    public LocalDate getDateDepart() {
+    public String getDateDepart() {
         return dateDepart;
     }
 
-    public void setDateDepart(LocalDate dateDepart) {
+    public void setDateDepart(String dateDepart) {
         this.dateDepart = dateDepart;
     }
 
-    public LocalDate getDateArrivee() {
+    public String getDateArrivee() {
         return dateArrivee;
     }
 
-    public void setDateArrivee(LocalDate dateArrivee) {
+    public void setDateArrivee(String dateArrivee) {
         this.dateArrivee = dateArrivee;
     }
 

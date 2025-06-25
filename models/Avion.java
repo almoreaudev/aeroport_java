@@ -6,22 +6,18 @@ import java.time.format.DateTimeFormatter;
 public class Avion {
 
     private int idAvion;
-    private LocalDate dateEntretien;
-    private LocalDate dateControleSecurite;
-    private TypeAvion typeAvion;
+    private String dateEntretien;
+    private String dateControleSecurite;
+    private String typeAvion;
+    private int capacitePassagers;
 
-    public Avion(int idAvion, String dateEntretien, String dateControleSecurite, TypeAvion typeAvion) {
+    public Avion(int idAvion, String dateEntretien, String dateControleSecurite, String typeAvion, int capacitePassagers) {
         this.idAvion = idAvion;
-        this.dateEntretien = convertStringToDate(dateEntretien);
-        this.dateControleSecurite = convertStringToDate(dateControleSecurite);
+        this.dateEntretien = dateEntretien;
+        this.dateControleSecurite = dateControleSecurite;
+        this.typeAvion = typeAvion;
     }
 
-    private LocalDate convertStringToDate(String strDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date = LocalDate.parse(strDate, formatter);
-
-        return date;
-    }
 
     public int getIdAvion() {
         return idAvion;
@@ -29,24 +25,33 @@ public class Avion {
     public void setIdAvion(int idAvion) {
         this.idAvion = idAvion;
     }
-    public LocalDate getDateEntretien() {
+    public String getDateEntretien() {
         return dateEntretien;
     }
-    public void setDateEntretien(LocalDate dateEntretien) {
+    public void setDateEntretien(String dateEntretien) {
         this.dateEntretien = dateEntretien;
     }
-    public LocalDate getDateControleSecurite() {
+    public String getDateControleSecurite() {
         return dateControleSecurite;
     }
-    public void setDateControleSecurite(LocalDate dateControleSecurite) {
+    public void setDateControleSecurite(String dateControleSecurite) {
         this.dateControleSecurite = dateControleSecurite;
     }
-    public TypeAvion getTypeAvion() {
+    public String getTypeAvion() {
         return typeAvion;
     }
-    public void setTypeAvion(TypeAvion typeAvion) {
+    public void setTypeAvion(String typeAvion) {
         this.typeAvion = typeAvion;
     }
+
+    public int getCapacitePassagers() {
+        return capacitePassagers;
+    }
+
+    public void setCapacitePassagers(int capacitePassagers) {
+        this.capacitePassagers = capacitePassagers;
+    }
+
     @Override
     public String toString() {
         return "Avion{" +
@@ -54,6 +59,7 @@ public class Avion {
                 ", dateEntretien=" + dateEntretien +
                 ", dateControleSecurite=" + dateControleSecurite +
                 ", typeAvion=" + typeAvion +
+                ", capacitePassagers=" + capacitePassagers +
                 '}';
     }
 
