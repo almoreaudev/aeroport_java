@@ -146,13 +146,15 @@ CREATE TABLE IF NOT EXISTS Facture (
 -- Billet avion
 CREATE TABLE IF NOT EXISTS Billet (
     idBillet INT AUTO_INCREMENT PRIMARY KEY,
-    idVol INT NOT NULL,
     idUtilisateur INT NOT NULL,
-    idFacture INT NOT NULL,
-    prixBillet DECIMAL(10, 2) NOT NULL,
-    aAssurance BOOLEAN NOT NULL DEFAULT FALSE,
+    idVol INT NOT NULL,
+    codeCategorie VARCHAR(10) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+    nom VARCHAR(50) NOT NULL,
+    prix DECIMAL(10, 2) NOT NULL,
+    FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur),
     FOREIGN KEY (idVol) REFERENCES Vol(idVol),
-    FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur)
+    FOREIGN KEY (codeCategorie) REFERENCES CategoriePassager(codeCategorie)
 );
 
 -- Passager

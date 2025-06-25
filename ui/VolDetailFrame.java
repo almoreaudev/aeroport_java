@@ -19,7 +19,7 @@ public class VolDetailFrame extends JFrame {
 
     public VolDetailFrame(Vol vol) {
         setTitle("Détails du Vol ID: " + vol.getIdVol());
-        setSize(400, 500);
+        setSize(400, 800);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE); // Fermer seulement cette fenêtre
 

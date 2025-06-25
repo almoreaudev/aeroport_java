@@ -57,6 +57,25 @@ public class UtilisateurDAO {
         }
     }
 
+    public Utilisateur getUtilisateurByEmail(String email) {
+        String sql = "SELECT * FROM Utilisateur WHERE email = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return mapResultSetToUtilisateur(rs);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null; // Aucun utilisateur trouvé
+    }
 
     // Mapping entre le ResultSet et l'objet Utilisateur
     private Utilisateur mapResultSetToUtilisateur(ResultSet rs) throws SQLException {

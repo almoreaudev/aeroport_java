@@ -25,6 +25,10 @@ public class VolListUI extends JFrame {
     private JLabel userLabel;
     private String currentUser;
 
+    private JButton loginButton;
+    private JButton inscriptionButton;
+    private JButton logoutButton;
+    private JButton detailUserButton;
 
 
     public VolListUI() {
@@ -35,6 +39,7 @@ public class VolListUI extends JFrame {
 
         initComponents();
         loadFlights();
+        checkVisibilityButtons();
     }
 
     private void initComponents() {
@@ -61,7 +66,7 @@ public class VolListUI extends JFrame {
 
         // Panneau Connexion/Inscription (droite)
         JPanel authPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        JButton loginButton = new JButton("Connexion");
+        loginButton = new JButton("Connexion");
 
         loginButton.addActionListener(e -> {
             JTextField emailField = new JTextField();
@@ -82,27 +87,50 @@ public class VolListUI extends JFrame {
 
                 if (utilisateur != null) {
                     currentUser = utilisateur.getNom() + " " + utilisateur.getPrenom();
-                    utils.LocalUserConfig.setLastUser(currentUser);
+                    utils.LocalUserConfig.setLastUser(email);
                     userLabel.setText("Connecté : " + currentUser);
                     JOptionPane.showMessageDialog(this, "Connexion réussie !");
                 } else {
                     JOptionPane.showMessageDialog(this, "Email ou mot de passe incorrect.", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
+                checkVisibilityButtons();
             }
         });
 
 
-        JButton inscriptionButton = new JButton("Inscription");
+        inscriptionButton = new JButton("Inscription");
         inscriptionButton.addActionListener(e -> ouvrirFormulaireInscription());
         
+        detailUserButton = new JButton("Détails Utilisateur");
+        detailUserButton.addActionListener(e -> {
+            String user = utils.LocalUserConfig.getLastUser();
+            System.out.println("Current user: " + user);
+            if (user.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Veuillez vous connecter pour voir les détails de l'utilisateur.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            } else {
+                UtilisateurDAO utilisateurDAO = new UtilisateurDAO();
+                Utilisateur utilisateur = utilisateurDAO.getUtilisateurByEmail(user);
+                if (utilisateur != null) {
+
+                    // Ouvre la nouvelle fenêtre
+                    new DetailUtilisateurFenetre(utilisateur);
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Utilisateur non trouvé.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+
+        authPanel.add(detailUserButton);
 
 
-        JButton logoutButton = new JButton("Déconnexion");
+        logoutButton = new JButton("Déconnexion");
         logoutButton.addActionListener(e -> {
             currentUser = "";
             utils.LocalUserConfig.setLastUser("");
             userLabel.setText("Non connecté");
             JOptionPane.showMessageDialog(this, "Déconnexion réussie !");
+            checkVisibilityButtons();
         });
         authPanel.add(logoutButton);
         authPanel.add(loginButton);
@@ -130,17 +158,31 @@ public class VolListUI extends JFrame {
         // ===========================
         // Boutons en bas
         // ===========================
-        JButton selectionButton = new JButton("Hello World");
-        selectionButton.addActionListener(e -> JOptionPane.showMessageDialog(this, "Hello World !"));
 
         JButton detailButton = new JButton("Voir Détails");
         detailButton.addActionListener(e -> showFlightDetails());
 
         JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        bottomPanel.add(selectionButton);
         bottomPanel.add(detailButton);
 
         add(bottomPanel, BorderLayout.SOUTH);
+    }
+
+    private void checkVisibilityButtons() {
+        // Si utilisateur est connecté, afficher le bouton de déconnexion et masquer le bouton de connexion et d'inscription
+        if (!currentUser.isEmpty()) {
+            loginButton.setVisible(false);
+            inscriptionButton.setVisible(false);
+            logoutButton.setVisible(true);
+            detailUserButton.setVisible(true);
+            userLabel.setText("Connecté : " + currentUser);
+        } else {
+            loginButton.setVisible(true);
+            inscriptionButton.setVisible(true);
+            logoutButton.setVisible(false);
+            detailUserButton.setVisible(false);
+            userLabel.setText("Non connecté");
+        }
     }
 
     private void ouvrirFormulaireInscription() {
@@ -193,11 +235,12 @@ public class VolListUI extends JFrame {
             if (success) {
                 JOptionPane.showMessageDialog(this, "Inscription réussie !");
                 currentUser = utilisateur.getNom() + " " + utilisateur.getPrenom();
-                utils.LocalUserConfig.setLastUser(currentUser);
+                utils.LocalUserConfig.setLastUser(email);
                 userLabel.setText("Connecté : " + currentUser);
             } else {
                 JOptionPane.showMessageDialog(this, "Erreur lors de l'inscription.", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
+            checkVisibilityButtons();
         }
     }
 

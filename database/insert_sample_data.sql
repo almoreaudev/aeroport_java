@@ -178,20 +178,15 @@ INSERT INTO Facture (idUtilisateur, dateFacture, montantTotal) VALUES
 (2, '2023-05-02 12:00:00', 300.00),
 (3, '2023-05-03 14:00:00', 150.00);
 
--- Billet
-INSERT INTO Billet (idVol, idUtilisateur, idFacture, prixBillet, aAssurance) VALUES
-(1, 1, 1, 200.00, TRUE),
-(2, 1, 2, 250.00, FALSE),
-(3, 1, 3, 300.00, TRUE),
-(4, 2, 4, 150.00, FALSE),
-(5, 2, 5, 300.00, TRUE),
-(6, 3, 6, 150.00, FALSE);
 
--- Passager
-INSERT INTO Passager (idBillet, nom, prenom, dateNaissance, numPasseport, codeCategorie) VALUES
-(1, 'Dupont', 'Alice', '1990-01-01', 'P12345678', 'ADULTE'),
-(2, 'Martin', 'Bob', '1985-02-02', 'P87654321', 'ADULTE'),
-(3, 'Durand', 'Charlie', '2000-03-03', 'P11223344', 'ETUDIANT'),
-(4, 'Dupont', 'David', '2010-04-04', 'P22334455', 'ENFANT'),
-(5, 'Martin', 'Eva', '2015-05-05', 'P33445566', 'ENFANT'),
-(6, 'Durand', 'Frank', '2005-06-06', 'P44556677', 'JEUNE');
+
+
+-- Billet
+INSERT INTO Billet (idUtilisateur, idVol, codeCategorie, prenom, nom, prix) VALUES
+(1, 1, 'ADULTE', 'Alice', 'Dupont', 150.00),
+(1, 2, 'ETUDIANT', 'Alice', 'Dupont', 120.00),
+(2, 3, 'ADULTE', 'Bob', 'Martin', 150.00),
+(3, 4, 'ENFANT', 'Charlie', 'Durand', 50.00),
+(1, 5, 'JEUNE_ADULTE', 'Alice', 'Dupont', 110.00),
+(2, 6, 'JEUNE', 'Bob', 'Martin', 90.00);
+

@@ -5,6 +5,6 @@ package models;
         ADULTE,
         ETUDIANT,
         ENFANT,
-        JEUNE_ADULTE,
+        JEUNE_ADUL,
         JEUNE
     }
