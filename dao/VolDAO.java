@@ -3,6 +3,7 @@ package dao;
 import utils.DatabaseConnection;
 
 import models.Vol;
+import models.A_pour_escale;
 import models.Aeroport;
 import models.CategorieVol;
 
@@ -102,6 +103,12 @@ public class VolDAO {
         Aeroport aa = new aeroportDAO().getAeroportByCode(codeAeroportArrive);
         vol.setAeroportArrive(aa);
         
+        List<A_pour_escale> escalesDetails = new a_pour_escaleDAO().getA_pour_escaleByIdVol(idVol);
+        vol.setEscalesDetails(escalesDetails);
+
+        List<Aeroport> escales = new a_pour_escaleDAO().getEscalesByIdVol(idVol);
+        vol.setEscales(escales);
+
         return vol;
     }
 

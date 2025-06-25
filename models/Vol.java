@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.DataFormater;
+
 public class Vol {
     private int idVol;
     private LocalDate dateDepart;
@@ -20,6 +22,8 @@ public class Vol {
     private Aeroport aeroportArrive;
     private List<Personnel> equipage = new ArrayList<Personnel>();
     private List<Repas> repasList = new ArrayList<Repas>();
+    private List<Aeroport> escales = new ArrayList<Aeroport>();
+    private List<A_pour_escale> escalesDetails = new ArrayList<A_pour_escale>();
 
     public Vol() {
     }
@@ -43,6 +47,14 @@ public class Vol {
         LocalDate date = LocalDate.parse(strDate, formatter);
 
         return date;
+    }
+
+    public void setEscales(List<Aeroport> escales) {
+        this.escales = escales;
+    }
+
+    public List<Aeroport> getEscales() {
+        return escales;
     }
 
     public void setAeroportDepart (Aeroport a){
@@ -151,6 +163,35 @@ public class Vol {
         this.repasList = repasList;
     }
 
+    public List<A_pour_escale> getEscalesDetails() {
+        return escalesDetails;
+    }
+
+    public void setEscalesDetails(List<A_pour_escale> escalesDetails) {
+        this.escalesDetails = escalesDetails;
+    }
+
+    public double getDureeTotal(){
+        DataFormater df = new DataFormater();
+        double totalDuree = df.convertirEnMinutes(this.duree);
+        for (A_pour_escale escale : escalesDetails) {
+            
+            double es = df.calculerDifferenceEnMinutes(escale.getDateDepartEscale(), escale.getDateArriveeEscale());
+            totalDuree += es;
+        }
+        return totalDuree;
+    }
+
+    public String getDureeTotalString(){
+        DataFormater df = new DataFormater();
+        double totalDuree = df.convertirEnMinutes(this.duree);
+        for (A_pour_escale escale : escalesDetails) {
+            double es = df.calculerDifferenceEnMinutes(escale.getDateDepartEscale(), escale.getDateArriveeEscale());
+            totalDuree += es;
+        }
+        return df.convertirMinutesEnHeure(totalDuree);
+    }
+
     @Override
     public String toString() {
         return "Vol{" +
@@ -167,6 +208,8 @@ public class Vol {
                 ", aeroportArrive=" + aeroportArrive.toString() +
                 ", equipage=" + equipage.toString() +
                 ", repasList=" + repasList +
+                ", escales=" + escales.toString() +
+                ", escalesDetails=" + escalesDetails.toString() +
                 '}';
     }
 
