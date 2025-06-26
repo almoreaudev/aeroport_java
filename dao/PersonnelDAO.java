@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import models.Personnel;
@@ -31,6 +31,29 @@ public class PersonnelDAO {
             e.printStackTrace();
         }
         return personnelList;
+    }
+
+    public void addPersonnel(Personnel personnel) {
+        String query = "INSERT INTO Personnel (nom, prenom, dateNaissance, codeType) VALUES (?, ?, ?, ?)";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, personnel.getNom());
+            stmt.setString(2, personnel.getPrenom());
+
+            DataFormater dataFormater = new DataFormater();
+            // Assure-toi que personnel.getDateNaissance() est au format "yyyy-MM-dd HH:mm"
+            stmt.setTimestamp(3, dataFormater.simpleParseDate(personnel.getDateNaissance()));
+
+            stmt.setString(4, personnel.getCodeType().name());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException | ParseException e) {
+            e.printStackTrace();
+}
+
     }
 
     public Personnel mapResultSetToPersonnel(ResultSet rs) throws SQLException {

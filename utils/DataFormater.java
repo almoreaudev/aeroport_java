@@ -1,6 +1,8 @@
 package utils;
 
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.Duration;
@@ -65,6 +67,20 @@ public class DataFormater {
         LocalDateTime date = LocalDateTime.parse(dateStr, formatter);
         LocalDateTime thresholdDate = LocalDateTime.now().minusMonths(months);
         return date.isBefore(thresholdDate);
+    }
+
+    public Timestamp simpleParseDate(String dateString) throws ParseException {
+        // Ce format gère les dates avec heures et minutes
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date parsedDate = dateFormat.parse(dateString);
+        return new java.sql.Timestamp(parsedDate.getTime());
+    }
+
+    public Timestamp parseDate(String dateString) throws ParseException {
+        // Ce format gère les dates avec heures et minutes
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        java.util.Date parsedDate = dateFormat.parse(dateString);
+        return new java.sql.Timestamp(parsedDate.getTime());
     }
 
 

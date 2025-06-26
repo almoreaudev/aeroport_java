@@ -7,8 +7,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UtilisateurDAO {
+
+    public ArrayList<Utilisateur> getAllUtilisateurs() {
+        ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+        String sql = "SELECT * FROM Utilisateur";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                utilisateurs.add(mapResultSetToUtilisateur(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return utilisateurs;
+    }
 
     public int getIdUtilisateurByEmail(String email) {
         String sql = "SELECT idUtilisateur FROM Utilisateur WHERE email = ?";

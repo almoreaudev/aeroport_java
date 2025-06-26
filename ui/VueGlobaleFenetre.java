@@ -46,6 +46,11 @@ public class VueGlobaleFenetre extends JFrame {
             personnelFrame.setVisible(true);
         });
 
+        clientsButton.addActionListener(e -> {
+            ListeUserFrame userFrame = new ListeUserFrame();
+            userFrame.setVisible(true);
+        });
+
         navPanel.add(ventesButton);
         navPanel.add(personnelButton);
         navPanel.add(clientsButton);
@@ -64,7 +69,7 @@ public class VueGlobaleFenetre extends JFrame {
         volsPanel.add(volsLabel);
 
 
-        String[] volsColumns = {"Départ", "Arrivé", "Date de départ", "Catégorie", "Retard", "Détail"};
+        String[] volsColumns = {"IdVol", "Départ", "Arrivé", "Date de départ", "Catégorie", "Retard", "Détail"};
         volsModel = new DefaultTableModel(volsColumns, 0);
         volsTable = new JTable(volsModel);
         JScrollPane volsScroll = new JScrollPane(volsTable);
@@ -117,10 +122,11 @@ public class VueGlobaleFenetre extends JFrame {
         List<Vol> vols = new VolDAO().getAllVols();
         for (Vol vol : vols) {
             Object[] rowData = {
+                vol.getIdVol(),
                 vol.getAeroportDepart().getCodeAeroport() + " - " + vol.getAeroportDepart().getVille(),
                 vol.getAeroportArrive().getCodeAeroport() + " - " + vol.getAeroportArrive().getVille(),
                 vol.getDateDepart(),
-                vol.getCodeTypeVol(),
+                vol.getCodeTypeVol().getCategorie(),
                 "Oui",
                 "Voir le détail"
             };
@@ -147,8 +153,11 @@ public class VueGlobaleFenetre extends JFrame {
                 int row = volsTable.rowAtPoint(e.getPoint());
                 int column = volsTable.columnAtPoint(e.getPoint());
 
-                if (column == 5) { // colonne "Détail"
-                    JOptionPane.showMessageDialog(null, "Détail du vol : " + volsTable.getValueAt(row, 0));
+                if (column == 6) { // colonne "Détail"
+                    int idVol = (int) volsTable.getValueAt(row, 0);
+                    Vol vol = new VolDAO().getVolById(idVol);
+                    VolDetailFrame detailFrame = new VolDetailFrame(vol);
+                    detailFrame.setVisible(true);
                 }
             }
         });

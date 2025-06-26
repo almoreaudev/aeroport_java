@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS CategoriePassager;
 DROP TABLE IF EXISTS Utilisateur;
 DROP TABLE IF EXISTS Facture;
 DROP TABLE IF EXISTS Billet;
+DROP TABLE IF EXISTS CarteFidelite;
 
 
 CREATE TABLE IF NOT EXISTS TypeAvion (
@@ -169,4 +170,13 @@ CREATE TABLE IF NOT EXISTS Passager (
     codeCategorie VARCHAR(10) NOT NULL,
     FOREIGN KEY (idBillet) REFERENCES Billet(idBillet),
     FOREIGN KEY (codeCategorie) REFERENCES CategoriePassager(codeCategorie)
+);
+
+-- CarteFidelite
+CREATE TABLE IF NOT EXISTS CarteFidelite (
+    idCarte INT AUTO_INCREMENT PRIMARY KEY,
+    idUtilisateur INT NOT NULL,
+    totalMiles INT NOT NULL DEFAULT 0,
+    dateInscription DATETIME NOT NULL,
+    FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur)
 );

@@ -17,6 +17,7 @@ DELETE FROM CategoriePassager;
 DELETE FROM Utilisateur;
 DELETE FROM Facture;
 DELETE FROM Billet;
+DELETE FROM CarteFidelite;
 
 
 -- Insertion de données dans la table Type_Avion
@@ -328,3 +329,7 @@ INSERT INTO Billet (idUtilisateur, idVol, codeCategorie, prenom, nom, prix) VALU
 (1, 5, 'JEUNE_ADULTE', 'Alice', 'Dupont', 110.00),
 (2, 6, 'JEUNE', 'Bob', 'Martin', 90.00);
 
+INSERT INTO CarteFidelite (idUtilisateur, totalMiles, dateInscription) VALUES
+(1, 7000, '2023-01-01 10:00:00'),
+(2, 500, '2023-02-01 11:00:00'),
+(3, 2000, '2023-03-01 12:00:00');

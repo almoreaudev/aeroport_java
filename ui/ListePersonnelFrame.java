@@ -73,6 +73,13 @@ public class ListePersonnelFrame extends javax.swing.JFrame {
             tableModel.addRow(rowData);
         }
 
+        // Bouton pout ajouter un nouveau personnel
+        javax.swing.JButton addButton = new javax.swing.JButton("Ajouter un Personnel");
+        addButton.addActionListener(e -> {
+            // Ouvrir le formulaire d'ajout de personnel
+            new AjouterPersonnelFrame().setVisible(true);
+        });
+        mainPanel.add(addButton);
         // Ajouter le mainPanel à la fenêtre
         getContentPane().add(mainPanel);
     }
