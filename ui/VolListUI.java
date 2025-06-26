@@ -246,7 +246,7 @@ public class VolListUI extends JFrame {
 
     private void loadFlights() {
         VolDAO volDAO = new VolDAO();
-        volList = volDAO.getAllVols();
+        volList = volDAO.getVolsByStatut("A venir");
         displayFlights(volList);
     }
 

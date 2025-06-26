@@ -28,10 +28,10 @@ INSERT INTO TypeAvion (codeType, capacitePassagers) VALUES
 
 -- Insertion de données dans la table Avion
 INSERT INTO Avion (dateEntretien, dateControleSecurite, codeType) VALUES
-('2023-01-15 10:00:00', '2023-01-20 10:00:00', 'A320'),
-('2023-02-10 11:00:00', '2023-02-15 11:00:00', 'B737'),
-('2023-03-05 12:00:00', '2023-03-10 12:00:00', 'B777'),
-('2023-04-01 13:00:00', '2023-04-05 13:00:00', 'A380');
+('2025-06-15 10:00:00', '2023-06-20 10:00:00', 'A320'),
+('2025-06-10 11:00:00', '2023-06-15 11:00:00', 'B737'),
+('2025-06-05 12:00:00', '2023-06-10 12:00:00', 'B777'),
+('2025-04-01 13:00:00', '2023-04-05 13:00:00', 'A380');
 
 -- TypePersonnel
 INSERT INTO TypePersonnel (codeType, libelle) VALUES
@@ -81,21 +81,38 @@ INSERT INTO Aeroport (codeAeroport, nom, ville, pays) VALUES
 ('JFK', 'John F. Kennedy International Airport', 'New York', 'États-Unis'),
 ('DXB', 'Dubai International Airport', 'Dubaï', 'Émirats Arabes Unis');
 
--- Vol
+-- 12 Vol
 INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire, duree, idAvion, codeAeroportDepart, codeAeroportArrivee, codeCategorieVol) VALUES
-('2023-05-01 08:00:00', '2023-05-01 10:00:00', 500, 'Programmé', 2000, '2h', 1, 'CDG', 'LHR', 'COURT'),
-('2023-05-02 09:00:00', '2023-05-02 12:00:00', 1000, 'Programmé', 4000, '3h', 2, 'CDG', 'JFK', 'MOYEN'),
-('2023-05-03 14:00:00', '2023-05-03 20:00:00', 8000, 'Programmé', 30000, '8h', 3, 'CDG', 'DXB', 'LONG'),
-('2023-05-04 11:00:00', '2023-05-04 13:30:00', 600, 'Programmé', 2500, '2h30', 4, 'ORY', 'LHR', 'COURT'),
-('2023-05-05 15:00:00', '2023-05-05 18:00:00', 1200, 'Programmé', 5000, '3h', 1, 'ORY', 'JFK', 'MOYEN'),
-('2023-05-06 07:00:00', '2023-05-06 15:00:00', 9000, 'Programmé', 35000, '9h', 2, 'ORY', 'DXB', 'LONG'),
-('2023-05-07 10:00:00', '2023-05-07 12:30:00', 700, 'Programmé', 3000, '2h30', 3, 'LHR', 'CDG', 'COURT'),
-('2023-05-08 13:00:00', '2023-05-08 16:00:00', 1100, 'Programmé', 4500, '3h', 4, 'LHR', 'JFK', 'MOYEN'),
-('2023-05-09 16:00:00', '2023-05-09 22:00:00', 9500, 'Programmé', 40000, '8h30', 1, 'LHR', 'DXB', 'LONG'),
-('2023-05-10 12:00:00', '2023-05-10 14:30:00', 800, 'Programmé', 3500, '2h30', 2, 'JFK', 'CDG', 'COURT'),
-('2023-05-11 09:00:00', '2023-05-11 12:00:00', 1300, 'Programmé', 5000, '3h', 3, 'JFK', 'LHR', 'MOYEN'),
-('2023-05-12 14:00:00', '2023-05-12 20:00:00', 10000, 'Programmé', 45000, '9h', 4, 'JFK', 'DXB', 'LONG');
+('2023-05-01 08:00:00', '2023-05-01 10:00:00', 500, 'Finit', 2000, '2h', 1, 'CDG', 'LHR', 'COURT'),
+('2023-05-02 09:00:00', '2023-05-02 12:00:00', 1000, 'Finit', 4000, '3h', 2, 'CDG', 'JFK', 'MOYEN'),
+('2023-05-03 14:00:00', '2023-05-03 20:00:00', 8000, 'Finit', 30000, '8h', 3, 'CDG', 'DXB', 'LONG'),
+('2023-05-04 11:00:00', '2023-05-04 13:30:00', 600, 'Finit', 2500, '2h30', 4, 'ORY', 'LHR', 'COURT'),
+('2023-05-05 15:00:00', '2023-05-05 18:00:00', 1200, 'Finit', 5000, '3h', 1, 'ORY', 'JFK', 'MOYEN'),
+('2023-05-06 07:00:00', '2023-05-06 15:00:00', 9000, 'Finit', 35000, '9h', 2, 'ORY', 'DXB', 'LONG'),
+('2023-05-07 10:00:00', '2023-05-07 12:30:00', 700, 'Finit', 3000, '2h30', 3, 'LHR', 'CDG', 'COURT'),
+('2023-05-08 13:00:00', '2023-05-08 16:00:00', 1100, 'Finit', 4500, '3h', 4, 'LHR', 'JFK', 'MOYEN'),
+('2023-05-09 16:00:00', '2023-05-09 22:00:00', 9500, 'Finit', 40000, '8h30', 1, 'LHR', 'DXB', 'LONG'),
+('2023-05-10 12:00:00', '2023-05-10 14:30:00', 800, 'Finit', 3500, '2h30', 2, 'JFK', 'CDG', 'COURT'),
+('2023-05-11 09:00:00', '2023-05-11 12:00:00', 1300, 'Finit', 5000, '3h', 3, 'JFK', 'LHR', 'MOYEN'),
+('2023-05-12 14:00:00', '2023-05-12 20:00:00', 10000, 'Finit', 45000, '9h', 4, 'JFK', 'DXB', 'LONG');
 
+-- ajouter des vols après le 28 juin 2025
+INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire, duree, idAvion, codeAeroportDepart, codeAeroportArrivee, codeCategorieVol) VALUES
+('2025-07-01 08:00:00', '2025-07-01 10:00:00', 500, 'A venir', 2000, '2h', 1, 'CDG', 'LHR', 'COURT'),
+('2025-07-02 09:00:00', '2025-07-02 12:00:00', 1000, 'A venir', 4000, '3h', 2, 'CDG', 'JFK', 'MOYEN'),
+('2025-07-03 14:00:00', '2025-07-03 20:00:00', 8000, 'A venir', 30000, '8h', 3, 'CDG', 'DXB', 'LONG'),
+('2025-07-04 11:00:00', '2025-07-04 13:30:00', 600, 'A venir', 2500, '2h30', 4, 'ORY', 'LHR', 'COURT'),
+('2025-07-05 15:00:00', '2025-07-05 18:00:00', 1200, 'A venir', 5000, '3h', 1, 'ORY', 'JFK', 'MOYEN'),
+('2025-07-06 07:00:00', '2025-07-06 15:00:00', 9000, 'A venir', 35000, '9h', 2, 'ORY', 'DXB', 'LONG'),
+('2025-07-07 10:00:00', '2025-07-07 12:30:00', 700, 'A venir', 3000, '2h30', 3, 'LHR', 'CDG', 'COURT'),
+('2025-07-08 13:00:00', '2025-07-08 16:00:00', 1100, 'A venir', 4500, '3h', 4, 'LHR', 'JFK', 'MOYEN'),
+('2025-07-09 16:00:00', '2025-07-09 22:00:00', 9500, 'A venir', 40000, '8h30', 1, 'LHR', 'DXB', 'LONG'),
+('2025-07-10 12:00:00', '2025-07-10 14:30:00', 800, 'A venir', 3500, '2h30', 2, 'JFK', 'CDG', 'COURT'),
+('2025-07-11 09:00:00', '2025-07-11 12:00:00', 1300, 'A venir', 5000, '3h', 3, 'JFK', 'LHR', 'MOYEN'),
+('2025-07-12 14:00:00', '2025-07-12 20:00:00', 10000, 'A venir', 45000, '9h', 4, 'JFK', 'DXB', 'LONG'),
+('2025-07-13 08:00:00', '2025-07-13 10:00:00', 500, 'A venir', 2000, '2h', 1, 'CDG', 'LHR', 'COURT'),
+('2025-07-14 09:00:00', '2025-07-14 12:00:00', 1000, 'A venir', 4000, '3h', 2, 'CDG', 'JFK', 'MOYEN'),
+('2025-07-15 14:00:00', '2025-07-15 20:00:00', 8000, 'A venir', 30000, '8h', 3, 'CDG', 'DXB', 'LONG');
 -- a_comme_equipage
 INSERT INTO a_comme_equipage (idVol, idPersonnel) VALUES
 (1, 1), -- Vol 1 avec Pilote 1
@@ -129,6 +146,39 @@ INSERT INTO a_comme_equipage (idVol, idPersonnel) VALUES
 (6, 9), -- Vol 6 avec Hôtesse de l’air 9
 (6, 10); -- Vol 6 avec Steward 10
 
+-- Ajouter des equipages pour les vols après le 28 juin 2025 id vol 13+
+INSERT INTO a_comme_equipage (idVol, idPersonnel) VALUES
+(13, 1), -- Vol 13 avec Pilote 1
+(13, 2), -- Vol 13 avec Copilote 2
+(13, 3), -- Vol 13 avec Chef de cabine 3
+(13, 4), -- Vol 13 avec Hôtesse de l’air 4
+(13, 5), -- Vol 13 avec Steward 5
+(14, 6), -- Vol 14 avec Pilote 6
+(14, 7), -- Vol 14 avec Copilote 7
+(14, 8), -- Vol 14 avec Chef de cabine 8
+(14, 9), -- Vol 14 avec Hôtesse de l’air 9
+(14, 10), -- Vol 14 avec Steward 10
+(15, 1), -- Vol 15 avec Pilote 1
+(15, 2), -- Vol 15 avec Copilote 2
+(15, 3), -- Vol 15 avec Chef de cabine 3
+(15, 4), -- Vol 15 avec Hôtesse de l’air 4
+(15, 5), -- Vol 15 avec Steward 5,
+(16, 6), -- Vol 16 avec Pilote 6
+(16, 7), -- Vol 16 avec Copilote 7
+(16, 8), -- Vol 16 avec Chef de cabine 8
+(16, 9), -- Vol 16 avec Hôtesse de l’air 9
+(16, 10), -- Vol 16 avec Steward 10
+(17, 1), -- Vol 17 avec Pilote 1
+(17, 2), -- Vol 17 avec Copilote 2
+(17, 3), -- Vol 17 avec Chef de cabine 3
+(17, 4), -- Vol 17 avec Hôtesse de l’air 4
+(17, 5), -- Vol 17 avec Steward 5,
+(18, 6), -- Vol 18 avec Pilote 6
+(18, 7), -- Vol 18 avec Copilote 7
+(18, 8), -- Vol 18 avec Chef de cabine 8
+(18, 9), -- Vol 18 avec Hôtesse de l’air 9
+(18, 10); -- Vol 18 avec Steward 10
+
 -- Repas
 INSERT INTO Repas (codeType, idVol) VALUES
 ('SNACK', 1),
@@ -144,6 +194,21 @@ INSERT INTO Repas (codeType, idVol) VALUES
 ('DEJEUNER', 6),
 ('DINER', 6);
 
+-- Ajouter des repas pour les vols après le 28 juin 2025 id vol 13+
+INSERT INTO Repas (codeType, idVol) VALUES
+('SNACK', 13),
+('PETIT_DEJ', 13),
+('DEJEUNER', 14),
+('DINER', 14),
+('SNACK', 15),
+('PETIT_DEJ', 15),
+('DEJEUNER', 16),
+('DINER', 16),
+('SNACK', 17),
+('PETIT_DEJ', 17),
+('DEJEUNER', 18),
+('DINER', 18);
+
 -- a_pour_escale
 INSERT INTO a_pour_escale (idVol, codeAeroport, dateArriveeEscale, dateDepartEscale) VALUES
 (2, 'ORY', '2023-05-01 09:00:00', '2023-05-01 09:30:00'),
@@ -153,6 +218,23 @@ INSERT INTO a_pour_escale (idVol, codeAeroport, dateArriveeEscale, dateDepartEsc
 (5, 'DXB', '2023-05-05 16:00:00', '2023-05-05 16:30:00'),
 (5, 'CDG', '2023-05-06 08:00:00', '2023-05-06 08:30:00'),
 (5, 'ORY', '2023-05-07 11:00:00', '2023-05-07 11:30:00');
+
+-- Ajouter des escales pour les vols après le 28 juin 2025 id vol 13+
+INSERT INTO a_pour_escale (idVol, codeAeroport, dateArriveeEscale, dateDepartEscale) VALUES
+(14, 'ORY', '2025-07-01 09:00:00', '2025-07-01 09:30:00'),
+(14, 'CDG', '2025-07-02 10:00:00', '2025-07-02 10:30:00'),
+(15, 'LHR', '2025-07-03 15:00:00', '2025-07-03 15:30:00'),
+(15, 'JFK', '2025-07-04 12:00:00', '2025-07-04 12:30:00'),
+(17, 'DXB', '2025-07-05 16:00:00', '2025-07-05 16:30:00'),
+(18, 'CDG', '2025-07-06 08:00:00', '2025-07-06 08:30:00'),
+(18, 'ORY', '2025-07-07 11:00:00', '2025-07-07 11:30:00'),
+(19, 'LHR', '2025-07-08 15:00:00', '2025-07-08 15:30:00'),
+(19, 'JFK', '2025-07-09 12:00:00', '2025-07-09 12:30:00'),
+(20, 'DXB', '2025-07-10 16:00:00', '2025-07-10 16:30:00'),
+(20, 'CDG', '2025-07-11 08:00:00', '2025-07-11 08:30:00'),
+(20, 'ORY', '2025-07-12 11:00:00', '2025-07-12 11:30:00');
+
+
 
 -- CategoriePassager
 INSERT INTO CategoriePassager (codeCategorie, libelle, tarif) VALUES

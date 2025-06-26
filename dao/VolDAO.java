@@ -65,7 +65,29 @@ public class VolDAO {
         return vols;
     }
 
-   
+    // statut = "Finit" ou "A venir"
+    public List<Vol> getVolsByStatut(String statut) {
+        List<Vol> vols = new ArrayList<>();
+        String sql = "SELECT * FROM vol WHERE statut = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, statut);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Vol vol = mapResultSetToVol(rs);
+                vols.add(vol);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vols;
+    }
+
+
 
     // Méthode pour supprimer un vol
     public boolean deleteVol(int id) {

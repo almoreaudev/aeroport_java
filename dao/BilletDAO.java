@@ -53,7 +53,52 @@ public class BilletDAO {
             e.printStackTrace();
             return false; // Return false if an error occurred during insertion
         }
-        
+
+    }
+
+    // vol.statut = "A venir" || vol.statut = "En cours"
+    // idUtilisateur = idUtilisateur
+    public List<BilletAvion> getBilletsByIdUtilisateurAndStatut(int idUtilisateur, String statut) {
+        String sql = "SELECT b.* FROM billet b JOIN vol v ON b.idVol = v.idVol WHERE b.idUtilisateur = ? AND v.statut = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idUtilisateur);
+            stmt.setString(2, statut);
+            ResultSet rs = stmt.executeQuery();
+
+            List<BilletAvion> billets = new ArrayList<>();
+            while (rs.next()) {
+                billets.add(mapResultSetToBillet(rs));
+            }
+            return billets; // Return the list of billets found
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>(); // Return an empty list if no billets found or in case of an error
+    }
+
+
+    public List<BilletAvion> getBilletsByIdVol(int idVol) {
+        String sql = "SELECT * FROM billet WHERE idVol = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idVol);
+            ResultSet rs = stmt.executeQuery();
+
+            List<BilletAvion> billets = new ArrayList<>();
+            while (rs.next()) {
+                billets.add(mapResultSetToBillet(rs));
+            }
+            return billets; // Return the list of billets found
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>(); // Return an empty list if no billets found or in case
+        // of an error
     }
 
     private BilletAvion mapResultSetToBillet(ResultSet rs) throws SQLException {
