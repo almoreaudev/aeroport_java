@@ -80,7 +80,7 @@ public class BilletDAO {
     }
 
 
-    public List<BilletAvion> getBilletsByIdVol(int idVol) {
+    public ArrayList<BilletAvion> getBilletsByIdVol(int idVol) {
         String sql = "SELECT * FROM billet WHERE idVol = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -88,7 +88,7 @@ public class BilletDAO {
             stmt.setInt(1, idVol);
             ResultSet rs = stmt.executeQuery();
 
-            List<BilletAvion> billets = new ArrayList<>();
+            ArrayList<BilletAvion> billets = new ArrayList<>();
             while (rs.next()) {
                 billets.add(mapResultSetToBillet(rs));
             }

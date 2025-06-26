@@ -34,6 +34,13 @@ public class VueGlobaleFenetre extends JFrame {
         JButton personnelButton = new JButton("Liste du personnel");
         JButton clientsButton = new JButton("Liste des clients");
 
+        ventesButton.addActionListener(e -> {
+            SwingUtilities.invokeLater(() -> {
+                BilanVenteFrame frame = new BilanVenteFrame();
+                frame.setVisible(true);
+            });
+        });
+
         personnelButton.addActionListener(e -> {
             ListePersonnelFrame personnelFrame = new ListePersonnelFrame();
             personnelFrame.setVisible(true);

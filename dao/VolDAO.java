@@ -102,6 +102,28 @@ public class VolDAO {
         }
     }
 
+    public ArrayList<Vol> getVolsByMonthAndYear (int month, int year) {
+        ArrayList<Vol> vols = new ArrayList<>();
+        String sql = "SELECT * FROM vol WHERE MONTH(dateDepart) = ? AND YEAR(dateDepart) = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, month);
+            stmt.setInt(2, year);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Vol vol = mapResultSetToVol(rs);
+                vols.add(vol);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vols;
+    }
+
     // Mapping ResultSet -> Vol
     public Vol mapResultSetToVol(ResultSet rs) throws SQLException {
         int idVol = rs.getInt("idVol");

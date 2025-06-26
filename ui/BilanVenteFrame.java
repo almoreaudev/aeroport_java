@@ -8,6 +8,13 @@ import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import dao.BilletDAO;
+import dao.VolDAO;
+import models.Vol;
+import models.BilletAvion;
 
 public class BilanVenteFrame extends JFrame {
 
@@ -29,6 +36,7 @@ public class BilanVenteFrame extends JFrame {
 
         // Graphique camembert
         ChartPanel pieChartPanel = createPieChart();
+        pieChartPanel.setSize(new Dimension(300, 300)); // Fixer la taille du graphique
         topPanel.add(pieChartPanel);
 
         // Tableau des destinations
@@ -51,21 +59,45 @@ public class BilanVenteFrame extends JFrame {
     }
 
     private ChartPanel createBarChart() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(4.2, "2025", "Janvier");
-        dataset.addValue(2.5, "2025", "Février");
-        dataset.addValue(3.5, "2025", "Mars");
-        dataset.addValue(4.5, "2025", "Avril");
 
-        dataset.addValue(2.2, "2024", "Janvier");
-        dataset.addValue(4.2, "2024", "Février");
-        dataset.addValue(1.8, "2024", "Mars");
-        dataset.addValue(2.7, "2024", "Avril");
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        String[] mois = {"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
+
+        for (int i = 0; i < 12; i++) {
+            
+            // Récupérer tout les vols du mois de janvier 2024
+            List<Vol> volsMonth2024 = new VolDAO().getVolsByMonthAndYear(i + 1, 2024);
+            // Récupérer le total des prix des billets pour chaque vol
+            double prixTotal = 0.0;
+            for (Vol vol : volsMonth2024) {
+                ArrayList<BilletAvion> billets = new BilletDAO().getBilletsByIdVol(vol.getIdVol());
+                for (BilletAvion billet : billets) {
+                    prixTotal += billet.getPrix();
+                }
+            }
+
+            dataset.addValue(prixTotal, "2024", mois[i]);
+        }
+
+        for (int i = 0; i < 12; i++) {
+            // Récupérer tout les vols du mois de janvier 2025
+            List<Vol> volsMonth2025 = new VolDAO().getVolsByMonthAndYear(i + 1, 2025);
+            // Récupérer le total des prix des billets pour chaque vol
+            double prixTotal = 0.0;
+            for (Vol vol : volsMonth2025) {
+                ArrayList<BilletAvion> billets = new BilletDAO().getBilletsByIdVol(vol.getIdVol());
+                for (BilletAvion billet : billets) {
+                    prixTotal += billet.getPrix();
+                }
+            }
+
+            dataset.addValue(prixTotal, "2025", mois[i]);
+        }
 
         JFreeChart barChart = ChartFactory.createBarChart(
                 "Ventes annuelles",
                 "Mois",
-                "Ventes",
+                "Ventes (en €)",
                 dataset
         );
 
@@ -122,10 +154,5 @@ public class BilanVenteFrame extends JFrame {
         return new ChartPanel(pieChart);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            BilanVenteFrame dashboard = new DashboardExample();
-            dashboard.setVisible(true);
-        });
-    }
+
 }

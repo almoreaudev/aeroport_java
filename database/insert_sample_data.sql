@@ -130,6 +130,14 @@ INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire,
 ('2024-11-01 09:00:00', '2024-11-01 12:00:00', 1300, 'Finit', 5000, '3h', 3, 'JFK', 'LHR', 'MOYEN'),
 ('2024-12-01 14:00:00', '2024-12-01 20:00:00', 10000, 'Finit', 45000, '9h', 4, 'JFK', 'DXB', 'LONG');
 
+-- Ajouter 5 vols finit pour les premiers mois de l'année 2025 (id 40 à 44)
+INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire, duree, idAvion, codeAeroportDepart, codeAeroportArrivee, codeCategorieVol) VALUES
+('2025-01-01 08:00:00', '2025-01-01 10:00:00', 500, 'Finit', 2000, '2h', 1, 'CDG', 'LHR', 'COURT'),
+('2025-02-01 09:00:00', '2025-02-01 12:00:00', 1000, 'Finit', 4000, '3h', 2, 'CDG', 'JFK', 'MOYEN'),
+('2025-03-01 14:00:00', '2025-03-01 20:00:00', 8000, 'Finit', 30000, '8h', 3, 'CDG', 'DXB', 'LONG'),
+('2025-04-01 11:00:00', '2025-04-01 13:30:00', 600, 'Finit', 2500, '2h30', 4, 'ORY', 'LHR', 'COURT'),
+('2025-05-01 15:00:00', '2025-05-01 18:00:00', 1200, 'Finit', 5000, '3h', 1, 'ORY', 'JFK', 'MOYEN');
+
 -- Ajouter 3 billets par vol de l'année 2024 avec des totals de prix différents
 INSERT INTO Billet (idUtilisateur, idVol, codeCategorie, prenom, nom, prix) VALUES
 (1, 28, 'ADULTE', 'Alice', 'Dupont', 150.00),
@@ -150,7 +158,14 @@ INSERT INTO Billet (idUtilisateur, idVol, codeCategorie, prenom, nom, prix) VALU
 (3, 39, 'ENFANT', 'Charlie', 'Durand', 50.00),
 (1, 39, 'JEUNE_ADULTE', 'Alice', 'Dupont', 110.00),
 (2, 38, 'JEUNE', 'Bob', 'Martin', 90.00),
-(3, 37, 'SENIOR', 'Charlie', 'Durand', 100.00);
+(3, 37, 'SENIOR', 'Charlie', 'Durand', 100.00),
+(1, 41, 'ADULTE', 'Alice', 'Dupont', 150.00),
+(2, 42, 'ETUDIANT', 'Bob', 'Martin', 120.00),
+(3, 43, 'ENFANT', 'Charlie', 'Durand', 50.00),
+(1, 44, 'JEUNE_ADULTE', 'Alice', 'Dupont', 110.00),
+(2, 43, 'JEUNE', 'Bob', 'Martin', 90.00),
+(3, 44, 'SENIOR', 'Charlie', 'Durand', 100.00);
+
 
 
 -- a_comme_equipage
