@@ -247,6 +247,7 @@ INSERT INTO CategoriePassager (codeCategorie, libelle, tarif) VALUES
 
 -- Utilisateur 
 INSERT INTO Utilisateur (nom, prenom, email, motDePasse, adresse, numPasseport, numCarteIdentite) VALUES
+('Moreau', 'Alexandre', 'alex@gmail.com', 'root', '6 impasse', '123456789', '987654321', TRUE),
 ('Dupont', 'Alice', 'alice@gmail.com', 'password123', '123 Rue de Paris, Paris, France', 'P12345678', 'CI12345678'),
 ('Martin', 'Bob', 'bob@free.fr', 'password456', '456 Avenue des Champs, Paris, France', 'P87654321', 'CI87654321'),
 ('Durand', 'Charlie', 'charlie@gmail.com', 'password789', '789 Boulevard Saint-Germain, Paris, France', 'P11223344', 'CI11223344');

@@ -130,7 +130,8 @@ CREATE TABLE IF NOT EXISTS Utilisateur (
     motDePasse VARCHAR(255) NOT NULL,
     adresse VARCHAR(255) NOT NULL,
     numPasseport VARCHAR(20) NOT NULL UNIQUE,
-    numCarteIdentite VARCHAR(20) NOT NULL UNIQUE
+    numCarteIdentite VARCHAR(20) NOT NULL UNIQUE,
+    superUtilisateur BOOLEAN NOT NULL DEFAULT FALSE,
 );
 
 -- Facture
