@@ -1,11 +1,23 @@
 package ui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 import java.awt.*;
 import java.awt.event.*;
 
+import java.util.List;
+import dao.VolDAO;
+import models.Vol;
+
+import dao.AvionDAO;
+import models.Avion;
+
 public class VueGlobaleFenetre extends JFrame {
+    private DefaultTableModel volsModel;
+    private JTable volsTable;
 
     public VueGlobaleFenetre() {
         setTitle("Vue Globale");
@@ -22,6 +34,8 @@ public class VueGlobaleFenetre extends JFrame {
         JButton personnelButton = new JButton("Liste du personnel");
         JButton clientsButton = new JButton("Liste des clients");
 
+        
+
         navPanel.add(ventesButton);
         navPanel.add(personnelButton);
         navPanel.add(clientsButton);
@@ -37,14 +51,12 @@ public class VueGlobaleFenetre extends JFrame {
         volsPanel.setLayout(new BoxLayout(volsPanel, BoxLayout.Y_AXIS));
 
         JLabel volsLabel = new JLabel("Liste des vols :");
-        JTextField filtreField = new JTextField("Filtrer sur la catégorie...", 20);
-
         volsPanel.add(volsLabel);
-        volsPanel.add(filtreField);
+
 
         String[] volsColumns = {"Départ", "Arrivé", "Date de départ", "Catégorie", "Retard", "Détail"};
-        DefaultTableModel volsModel = new DefaultTableModel(volsColumns, 0);
-        JTable volsTable = new JTable(volsModel);
+        volsModel = new DefaultTableModel(volsColumns, 0);
+        volsTable = new JTable(volsModel);
         JScrollPane volsScroll = new JScrollPane(volsTable);
 
         volsPanel.add(volsScroll);
@@ -54,9 +66,32 @@ public class VueGlobaleFenetre extends JFrame {
         JPanel avionsPanel = new JPanel();
         avionsPanel.setLayout(new BoxLayout(avionsPanel, BoxLayout.Y_AXIS));
 
+        // Création du menu déroulant pour la catégorie
+        String[] categories = {"Tous", "Courts-courriers", "Moyens-courriers", "Longs-courriers"};
+        JComboBox<String> categorieComboBox = new JComboBox<>(categories);
+        volsPanel.add(new JLabel("Filtrer sur la catégorie : "));
+        volsPanel.add(categorieComboBox);
+
+        // Préparation du filtre dynamique
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(volsModel);
+        volsTable.setRowSorter(sorter);
+
+        // Ajout du listener pour filtrer
+        categorieComboBox.addActionListener(e -> {
+            String selectedCategory = (String) categorieComboBox.getSelectedItem();
+            if (selectedCategory.equals("Tous")) {
+                sorter.setRowFilter(null); // Affiche tout
+            } else {
+                sorter.setRowFilter(RowFilter.regexFilter(selectedCategory));
+            }
+        });
+
+
+
         JLabel avionsLabel = new JLabel("Liste des avions :");
 
-        String[] avionsColumns = {"Code avion", "Nom", "Contrôle de sécurité", "Détail"};
+
+        String[] avionsColumns = {"Code avion", "Nom","Entretien", "Contrôle de sécurité", "Détail"};
         DefaultTableModel avionsModel = new DefaultTableModel(avionsColumns, 0);
         JTable avionsTable = new JTable(avionsModel);
         JScrollPane avionsScroll = new JScrollPane(avionsTable);
@@ -69,9 +104,32 @@ public class VueGlobaleFenetre extends JFrame {
 
         add(mainPanel, BorderLayout.CENTER);
 
-        // Exemple de données (tu pourras les remplacer par tes DAO)
-        volsModel.addRow(new Object[]{"Paris", "Edimbourg", "17/06/2025", "Moyen courrier", "Oui", "Voir le détail"});
-        avionsModel.addRow(new Object[]{"AEC", "A380", "En retard", "Voir le détail"});
+        List<Vol> vols = new VolDAO().getAllVols();
+        for (Vol vol : vols) {
+            Object[] rowData = {
+                vol.getAeroportDepart().getCodeAeroport() + " - " + vol.getAeroportDepart().getVille(),
+                vol.getAeroportArrive().getCodeAeroport() + " - " + vol.getAeroportArrive().getVille(),
+                vol.getDateDepart(),
+                vol.getCodeTypeVol(),
+                "Oui",
+                "Voir le détail"
+            };
+            volsModel.addRow(rowData);
+        }
+
+        List<Avion> avions = new AvionDAO().getAllAvions();
+        for (Avion avion : avions) {
+            // Vérification du contrôle de sécurité
+            
+            Object[] rowData = {
+                avion.getIdAvion(),
+                avion.getTypeAvion(),
+                avion.isEntretienEnRetard() ? "Oui" : "Non",
+                avion.isControleEnRetard() ? "Oui" : "Non",
+                "Voir le détail"
+            };
+            avionsModel.addRow(rowData);
+        }
 
         // Gestion du clic sur "Voir le détail" dans la table des vols
         volsTable.addMouseListener(new MouseAdapter() {
@@ -91,19 +149,14 @@ public class VueGlobaleFenetre extends JFrame {
                 int row = avionsTable.rowAtPoint(e.getPoint());
                 int column = avionsTable.columnAtPoint(e.getPoint());
 
-                if (column == 3) { // colonne "Détail"
-                    JOptionPane.showMessageDialog(null, "Détail de l'avion : " + avionsTable.getValueAt(row, 0));
+                if (column == 4) { // colonne "Détail"
+                    int idAvion = (int) avionsTable.getValueAt(row, 0);
+                    Avion avion = new AvionDAO().getAvionById(idAvion);
+                    detailAvion detailFrame = new detailAvion(avion);
+                    detailFrame.setVisible(true);
                 }
             }
         });
-
-        // Exemple d'action sur le champ de filtre (non connecté encore à la table)
-        filtreField.addActionListener(e -> {
-            String filtre = filtreField.getText();
-            JOptionPane.showMessageDialog(null, "Filtrage sur la catégorie : " + filtre);
-            // Ici tu pourras appliquer ton vrai filtre
-        });
-
         setVisible(true);
     }
 }

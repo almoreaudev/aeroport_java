@@ -28,10 +28,10 @@ INSERT INTO TypeAvion (codeType, capacitePassagers) VALUES
 
 -- Insertion de données dans la table Avion
 INSERT INTO Avion (dateEntretien, dateControleSecurite, codeType) VALUES
-('2025-06-15 10:00:00', '2023-06-20 10:00:00', 'A320'),
-('2025-06-10 11:00:00', '2023-06-15 11:00:00', 'B737'),
-('2025-06-05 12:00:00', '2023-06-10 12:00:00', 'B777'),
-('2025-04-01 13:00:00', '2023-04-05 13:00:00', 'A380');
+('2025-06-15 10:00:00', '2025-06-20 10:00:00', 'A320'),
+('2025-06-10 11:00:00', '2025-06-15 11:00:00', 'B737'),
+('2024-06-05 12:00:00', '2025-06-10 12:00:00', 'B777'),
+('2024-01-01 13:00:00', '2024-01-05 13:00:00', 'A380');
 
 -- TypePersonnel
 INSERT INTO TypePersonnel (codeType, libelle) VALUES

@@ -10,15 +10,11 @@ import models.CategorieVol;
 import models.Repas;
 
 import models.Personnel;
-import dao.a_comme_equipageDAO;
 
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.DateFormatter;
 
 
 public class VolDAO {
@@ -42,6 +38,7 @@ public class VolDAO {
         }
         return null;
     }
+
 
     // Méthode pour récupérer tous les vols
     public List<Vol> getAllVols() {
@@ -106,7 +103,7 @@ public class VolDAO {
     }
 
     // Mapping ResultSet -> Vol
-    private Vol mapResultSetToVol(ResultSet rs) throws SQLException {
+    public Vol mapResultSetToVol(ResultSet rs) throws SQLException {
         int idVol = rs.getInt("idVol");
         DataFormater dataFormater = new DataFormater();
         String dateDepartStr = dataFormater.formatDate(rs.getTimestamp("dateDepart"));

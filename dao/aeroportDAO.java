@@ -4,12 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import models.CategorieVol;
 import models.Aeroport;
-import models.Vol;
 import utils.DatabaseConnection;
 
 public class aeroportDAO {

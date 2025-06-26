@@ -60,6 +60,14 @@ public class DataFormater {
     }
 
 
+    public boolean isDateMoreThan(String dateStr, int months) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        LocalDateTime date = LocalDateTime.parse(dateStr, formatter);
+        LocalDateTime thresholdDate = LocalDateTime.now().minusMonths(months);
+        return date.isBefore(thresholdDate);
+    }
+
+
     public String convertirMinutesEnHeure(double totalMinutes) {
         if (totalMinutes <= 0) {
             return "0h";

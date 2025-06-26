@@ -3,6 +3,8 @@ package models;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import utils.DataFormater;
+
 public class Avion {
 
     private int idAvion;
@@ -16,6 +18,16 @@ public class Avion {
         this.dateEntretien = dateEntretien;
         this.dateControleSecurite = dateControleSecurite;
         this.typeAvion = typeAvion;
+    }
+
+    public boolean isControleEnRetard(){
+        // Si le contrôle a été fait il y a plus de 6 mois, on retourne true
+        return new DataFormater().isDateMoreThan(dateControleSecurite, 6);
+    }
+
+    public boolean isEntretienEnRetard(){
+        // Si l'entretien a été fait il y a plus de 12 mois, on retourne true
+        return new DataFormater().isDateMoreThan(dateEntretien, 12);
     }
 
 
