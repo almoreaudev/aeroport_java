@@ -33,6 +33,29 @@ public class BilletDAO {
         return new ArrayList<>(); // Return an empty list if no billets found or in case of an error
     }
 
+    public boolean addBillet(BilletAvion billet) {
+        String sql = "INSERT INTO billet (idUtilisateur, idVol, codeCategorie, prenom, nom, prix) VALUES (?, ?, ?, ?, ?, ?)";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, billet.getIdUtilisateur());
+            stmt.setInt(2, billet.getIdVol());
+            stmt.setString(3, billet.getCodeCategorie());
+            stmt.setString(4, billet.getPrenom());
+            stmt.setString(5, billet.getNom());
+            stmt.setDouble(6, billet.getPrix());
+
+            stmt.executeUpdate();
+
+            return true; // Return true if the insertion was successful
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false; // Return false if an error occurred during insertion
+        }
+        
+    }
+
     private BilletAvion mapResultSetToBillet(ResultSet rs) throws SQLException {
         int idBillet = rs.getInt("idBillet");
         int idUtilisateur = rs.getInt("idUtilisateur");

@@ -184,7 +184,7 @@ INSERT INTO Facture (idUtilisateur, dateFacture, montantTotal) VALUES
 -- Billet
 INSERT INTO Billet (idUtilisateur, idVol, codeCategorie, prenom, nom, prix) VALUES
 (1, 1, 'ADULTE', 'Alice', 'Dupont', 150.00),
-(1, 2, 'ETUDIANT', 'Alice', 'Dupont', 120.00),
+(1, 1, 'ETUDIANT', 'Pierre', 'Dupont', 120.00),
 (2, 3, 'ADULTE', 'Bob', 'Martin', 150.00),
 (3, 4, 'ENFANT', 'Charlie', 'Durand', 50.00),
 (1, 5, 'JEUNE_ADULTE', 'Alice', 'Dupont', 110.00),

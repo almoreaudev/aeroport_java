@@ -26,7 +26,7 @@ public class VolDAO {
 
     // Méthode pour récupérer un vol par ID
     public Vol getVolById(int id) {
-        String sql = "SELECT * FROM vols WHERE id = ?";
+        String sql = "SELECT * FROM vol WHERE idVol = ?";
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 

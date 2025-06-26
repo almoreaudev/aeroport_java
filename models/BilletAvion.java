@@ -10,6 +10,9 @@ public class BilletAvion {
     private String nom;
     private double prix;
 
+    public BilletAvion() {
+    }
+
     public BilletAvion(int idBillet, int idUtilisateur, int idVol, String codeCategorie, String prenom, String nom, double prix) {
         this.idBillet = idBillet;
         this.idUtilisateur = idUtilisateur;

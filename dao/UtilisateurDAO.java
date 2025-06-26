@@ -10,6 +10,24 @@ import java.sql.SQLException;
 
 public class UtilisateurDAO {
 
+    public int getIdUtilisateurByEmail(String email) {
+        String sql = "SELECT idUtilisateur FROM Utilisateur WHERE email = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, email);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt("idUtilisateur");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return -1; // Retourne -1 si l'utilisateur n'est pas trouvé
+    }
+
     // Vérifie si l'utilisateur existe (connexion)
     public Utilisateur verifierConnexion(String email, String motDePasse) {
         String sql = "SELECT * FROM Utilisateur WHERE email = ? AND motDePasse = ?";
