@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import models.Aeroport;
 import utils.DatabaseConnection;
@@ -30,6 +31,26 @@ public class aeroportDAO {
         }
         return null;
 
+    }
+
+    public ArrayList<Aeroport> getAllAeroports() {
+        ArrayList<Aeroport> aeroports = new ArrayList<>();
+        String sql = "SELECT * FROM Aeroport;";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Aeroport a = mapResultSetToAeroportVol(rs);
+                aeroports.add(a);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return aeroports;
     }
 
 

@@ -124,6 +124,49 @@ public class VolDAO {
         return vols;
     }
 
+    public ArrayList<Vol> getVolsByCategory(String categorie) {
+        ArrayList<Vol> vols = new ArrayList<>();
+        String sql = "SELECT * FROM vol WHERE codeCategorieVol = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, categorie);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Vol vol = mapResultSetToVol(rs);
+                vols.add(vol);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vols;
+    }
+
+    public ArrayList<Vol> getVolsByAeroport(String codeAeroport) {
+        ArrayList<Vol> vols = new ArrayList<>();
+        String sql = "SELECT * FROM vol WHERE codeAeroportDepart = ? OR codeAeroportArrivee = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, codeAeroport);
+            stmt.setString(2, codeAeroport);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Vol vol = mapResultSetToVol(rs);
+                vols.add(vol);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return vols;
+    }
+
     // Mapping ResultSet -> Vol
     public Vol mapResultSetToVol(ResultSet rs) throws SQLException {
         int idVol = rs.getInt("idVol");

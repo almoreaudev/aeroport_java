@@ -124,19 +124,19 @@ INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire,
 ('2024-05-01 15:00:00', '2024-05-01 18:00:00', 1200, 'Finit', 5000, '3h', 1, 'ORY', 'JFK', 'MOYEN'),
 ('2024-06-01 07:00:00', '2024-06-01 15:00:00', 9000, 'Finit', 35000, '9h', 2, 'ORY', 'DXB', 'LONG'),
 ('2024-07-01 10:00:00', '2024-07-01 12:30:00', 700, 'Finit', 3000, '2h30', 3, 'LHR', 'CDG', 'COURT'),
-('2024-08-01 13:00:00', '2024-08-01 16:00:00', 1100, 'Finit', 4500, '3h', 4, 'LHR', 'JFK', 'MOYEN'),
-('2024-09-01 16:00:00', '2024-09-01 22:00:00', 9500, 'Finit', 40000, '8h30', 1, 'LHR', 'DXB', 'LONG'),
+('2024-08-01 13:00:00', '2024-08-01 16:00:00', 1100, 'Finit', 4500, '3h', 4, 'LHR', 'JFK', 'COURT'),
+('2024-09-01 16:00:00', '2024-09-01 22:00:00', 9500, 'Finit', 40000, '8h30', 1, 'LHR', 'DXB', 'COURT'),
 ('2024-10-01 12:00:00', '2024-10-01 14:30:00', 800, 'Finit', 3500, '2h30', 2, 'JFK', 'CDG', 'COURT'),
-('2024-11-01 09:00:00', '2024-11-01 12:00:00', 1300, 'Finit', 5000, '3h', 3, 'JFK', 'LHR', 'MOYEN'),
-('2024-12-01 14:00:00', '2024-12-01 20:00:00', 10000, 'Finit', 45000, '9h', 4, 'JFK', 'DXB', 'LONG');
+('2024-11-01 09:00:00', '2024-11-01 12:00:00', 1300, 'Finit', 5000, '3h', 3, 'JFK', 'LHR', 'COURT'),
+('2024-12-01 14:00:00', '2024-12-01 20:00:00', 10000, 'Finit', 45000, '9h', 4, 'JFK', 'DXB', 'COURT');
 
 -- Ajouter 5 vols finit pour les premiers mois de l'année 2025 (id 40 à 44)
 INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire, duree, idAvion, codeAeroportDepart, codeAeroportArrivee, codeCategorieVol) VALUES
 ('2025-01-01 08:00:00', '2025-01-01 10:00:00', 500, 'Finit', 2000, '2h', 1, 'CDG', 'LHR', 'COURT'),
-('2025-02-01 09:00:00', '2025-02-01 12:00:00', 1000, 'Finit', 4000, '3h', 2, 'CDG', 'JFK', 'MOYEN'),
-('2025-03-01 14:00:00', '2025-03-01 20:00:00', 8000, 'Finit', 30000, '8h', 3, 'CDG', 'DXB', 'LONG'),
+('2025-02-01 09:00:00', '2025-02-01 12:00:00', 1000, 'Finit', 4000, '3h', 2, 'CDG', 'JFK', 'COURT'),
+('2025-03-01 14:00:00', '2025-03-01 20:00:00', 8000, 'Finit', 30000, '8h', 3, 'CDG', 'DXB', 'COURT'),
 ('2025-04-01 11:00:00', '2025-04-01 13:30:00', 600, 'Finit', 2500, '2h30', 4, 'ORY', 'LHR', 'COURT'),
-('2025-05-01 15:00:00', '2025-05-01 18:00:00', 1200, 'Finit', 5000, '3h', 1, 'ORY', 'JFK', 'MOYEN');
+('2025-05-01 15:00:00', '2025-05-01 18:00:00', 1200, 'Finit', 5000, '3h', 1, 'ORY', 'JFK', 'COURT');
 
 -- Ajouter 3 billets par vol de l'année 2024 avec des totals de prix différents
 INSERT INTO Billet (idUtilisateur, idVol, codeCategorie, prenom, nom, prix) VALUES

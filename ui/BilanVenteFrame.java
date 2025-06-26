@@ -7,13 +7,17 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.BilletDAO;
 import dao.VolDAO;
+import dao.aeroportDAO;
 import models.Vol;
+import models.Aeroport;
 import models.BilletAvion;
 
 public class BilanVenteFrame extends JFrame {
@@ -32,6 +36,7 @@ public class BilanVenteFrame extends JFrame {
 
         // Graphique barres
         ChartPanel barChartPanel = createBarChart();
+        barChartPanel.setSize(new Dimension(300, 300)); // Fixer la taille du graphique
         topPanel.add(barChartPanel);
 
         // Graphique camembert
@@ -106,9 +111,15 @@ public class BilanVenteFrame extends JFrame {
 
     private ChartPanel createPieChart() {
         DefaultPieDataset pieDataset = new DefaultPieDataset();
-        pieDataset.setValue("Long courrier", 60);
-        pieDataset.setValue("Moyen courrier", 30);
-        pieDataset.setValue("Court courrier", 10);
+
+        // Récupérer les vols COURT, MOYEN et LONG courrier
+        List<Vol> volsCourt = new VolDAO().getVolsByCategory("COURT");
+        List<Vol> volsMoyen = new VolDAO().getVolsByCategory("MOYEN");
+        List<Vol> volsLong = new VolDAO().getVolsByCategory("LONG");
+
+        pieDataset.setValue("Long courrier", volsLong.size());
+        pieDataset.setValue("Moyen courrier", volsMoyen.size());
+        pieDataset.setValue("Court courrier", volsCourt.size());
 
         JFreeChart pieChart = ChartFactory.createPieChart(
                 "Ventes par catégorie",
@@ -122,16 +133,34 @@ public class BilanVenteFrame extends JFrame {
     }
 
     private JScrollPane createTable() {
-        String[] columnNames = {"Destination", "Nombre de vols", "Prix moyen d'un vol"};
-        Object[][] data = {
-                {"Paris", 200, "300 €"},
-                {"?", "?", "?"},
-                {"?", "?", "?"}
-        };
 
-        JTable table = new JTable(data, columnNames);
+        String[] columnNames = {"Destination", "Nombre de vols", "Prix moyen d'un vol"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+        JTable table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setBorder(BorderFactory.createTitledBorder("Statistiques des destinations (2025)"));
+
+        
+        ArrayList<Aeroport> aeroports = new aeroportDAO().getAllAeroports();
+        for (Aeroport a : aeroports) {
+            ArrayList<Vol> vols = new VolDAO().getVolsByAeroport(a.getCodeAeroport());
+            double prixTotal = 0.0;
+            for (Vol vol : vols) {
+                // Récupérer le prix moyen des billets pour chaque vol
+                ArrayList<BilletAvion> billets = new BilletDAO().getBilletsByIdVol(vol.getIdVol());
+                for (BilletAvion billet : billets) {
+                    prixTotal += billet.getPrix();
+                }
+            }
+
+            double prixMoyen = vols.size() > 0 ? prixTotal / vols.size() : 0.0;
+            Object[] rowData = {
+                a.getVille() + " (" + a.getCodeAeroport() + ")",
+                vols.size(),
+                String.format("%.2f €", prixMoyen)
+            };
+            tableModel.addRow(rowData);
+        }
 
         return scrollPane;
     }
