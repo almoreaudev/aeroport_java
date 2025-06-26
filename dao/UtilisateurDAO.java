@@ -52,8 +52,8 @@ public class UtilisateurDAO {
     }
 
     public boolean creerUtilisateur(Utilisateur utilisateur) {
-        String sql = "INSERT INTO Utilisateur (nom, prenom, email, motDePasse, adresse, numPasseport, numCarteIdentite) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Utilisateur (nom, prenom, email, motDePasse, adresse, numPasseport, numCarteIdentite, superUtilisateur) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
             PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -65,6 +65,8 @@ public class UtilisateurDAO {
             stmt.setString(5, utilisateur.getAdresse());
             stmt.setString(6, utilisateur.getNumPasseport());
             stmt.setString(7, utilisateur.getNumCarteIdentite());
+            // superUser = false
+            stmt.setBoolean(8, false);
 
             int rowsInserted = stmt.executeUpdate();
             return rowsInserted > 0; // true si insertion réussie
@@ -106,6 +108,7 @@ public class UtilisateurDAO {
         utilisateur.setAdresse(rs.getString("adresse"));
         utilisateur.setNumPasseport(rs.getString("numPasseport"));
         utilisateur.setNumCarteIdentite(rs.getString("numCarteIdentite"));
+        utilisateur.setSuperUtilisateur(rs.getBoolean("superUtilisateur"));
         return utilisateur;
     }
 }

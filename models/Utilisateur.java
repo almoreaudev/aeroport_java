@@ -10,12 +10,13 @@ public class Utilisateur {
     private String adresse;
     private String numPasseport;
     private String numCarteIdentite;
+    private boolean superUtilisateur;
 
     public Utilisateur() {
         // Constructeur par défaut
     }
 
-    public Utilisateur(int idUtilisateur, String nom, String prenom, String email, String motDePasse, String adresse, String numPasseport, String numCarteIdentite) {
+    public Utilisateur(int idUtilisateur, String nom, String prenom, String email, String motDePasse, String adresse, String numPasseport, String numCarteIdentite, boolean superUtilisateur) {
         this.idUtilisateur = idUtilisateur;
         this.nom = nom;
         this.prenom = prenom;
@@ -24,6 +25,7 @@ public class Utilisateur {
         this.adresse = adresse;
         this.numPasseport = numPasseport;
         this.numCarteIdentite = numCarteIdentite;
+        this.superUtilisateur = superUtilisateur;
     }
 
     public int getIdUtilisateur() {
@@ -90,6 +92,16 @@ public class Utilisateur {
         this.numCarteIdentite = numCarteIdentite;
     }
 
+    public boolean isSuperUtilisateur() {
+        return superUtilisateur;
+    }
+
+    public void setSuperUtilisateur(boolean superUtilisateur) {
+        this.superUtilisateur = superUtilisateur;
+    }
+
+
+
     @Override
     public String toString() {
         return "Utilisateur{" +
@@ -101,6 +113,7 @@ public class Utilisateur {
                 ", adresse='" + adresse + '\'' +
                 ", numPasseport='" + numPasseport + '\'' +
                 ", numCarteIdentite='" + numCarteIdentite + '\'' +
+                ", superUtilisateur=" + superUtilisateur +
                 '}';
     }
 }

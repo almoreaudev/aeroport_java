@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS Utilisateur (
     adresse VARCHAR(255) NOT NULL,
     numPasseport VARCHAR(20) NOT NULL UNIQUE,
     numCarteIdentite VARCHAR(20) NOT NULL UNIQUE,
-    superUtilisateur BOOLEAN NOT NULL DEFAULT FALSE,
+    superUtilisateur BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 -- Facture

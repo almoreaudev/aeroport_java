@@ -38,6 +38,9 @@ public class DetailUtilisateurFenetre extends JFrame {
         infoPanel.add(new JLabel("Adresse : " + utilisateur.getAdresse()));
         infoPanel.add(new JLabel("Numéro de passeport : " + utilisateur.getNumPasseport()));
         infoPanel.add(new JLabel("Numéro de carte d'identité : " + utilisateur.getNumCarteIdentite()));
+        if (utilisateur.isSuperUtilisateur()) {
+            infoPanel.add(new JLabel("Rôle : Super Utilisateur"));
+        }
         infoPanel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         // Tableau "A venir"

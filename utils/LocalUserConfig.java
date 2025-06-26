@@ -42,4 +42,22 @@ public class LocalUserConfig {
             e.printStackTrace();
         }
     }
+
+    // set isSuperUser
+    public static void setIsSuperUser(boolean isSuperUser) {
+        Properties props = new Properties();
+        try (FileInputStream fis = new FileInputStream(CONFIG_FILE)) {
+            props.load(fis);
+        } catch (IOException e) {
+            // Si le fichier n'existe pas, on continue
+        }
+
+        props.setProperty("isSuperUser", String.valueOf(isSuperUser));
+
+        try (FileOutputStream fos = new FileOutputStream(CONFIG_FILE)) {
+            props.store(fos, "User configuration");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

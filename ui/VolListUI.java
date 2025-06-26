@@ -29,6 +29,7 @@ public class VolListUI extends JFrame {
     private JButton inscriptionButton;
     private JButton logoutButton;
     private JButton detailUserButton;
+    private JButton voirSuperUserDetailsButton;
 
 
     public VolListUI() {
@@ -88,7 +89,16 @@ public class VolListUI extends JFrame {
                 if (utilisateur != null) {
                     currentUser = utilisateur.getNom() + " " + utilisateur.getPrenom();
                     utils.LocalUserConfig.setLastUser(email);
+                    utils.LocalUserConfig.setIsSuperUser(utilisateur.isSuperUtilisateur());
                     userLabel.setText("Connecté : " + currentUser);
+
+                    if (utilisateur.isSuperUtilisateur()) {
+                        // Ouvre la fenêtre de vue globale si c'est un super utilisateur
+                        // Ajoute un bouton pour ouvrir la vue globale
+                        voirSuperUserDetailsButton.setVisible(true);
+                    } else {
+                        voirSuperUserDetailsButton.setVisible(false);
+                    }
                     JOptionPane.showMessageDialog(this, "Connexion réussie !");
                 } else {
                     JOptionPane.showMessageDialog(this, "Email ou mot de passe incorrect.", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -123,6 +133,12 @@ public class VolListUI extends JFrame {
 
         authPanel.add(detailUserButton);
 
+        voirSuperUserDetailsButton = new JButton("Données globales");
+        voirSuperUserDetailsButton.addActionListener(e -> {
+            //lance la fenêtre de vue globale
+            new VueGlobaleFenetre().setVisible(true);
+        });
+
 
         logoutButton = new JButton("Déconnexion");
         logoutButton.addActionListener(e -> {
@@ -133,6 +149,7 @@ public class VolListUI extends JFrame {
             checkVisibilityButtons();
         });
         authPanel.add(logoutButton);
+        authPanel.add(voirSuperUserDetailsButton);
         authPanel.add(loginButton);
         authPanel.add(inscriptionButton);
 
@@ -181,6 +198,7 @@ public class VolListUI extends JFrame {
             inscriptionButton.setVisible(true);
             logoutButton.setVisible(false);
             detailUserButton.setVisible(false);
+            voirSuperUserDetailsButton.setVisible(false);
             userLabel.setText("Non connecté");
         }
     }

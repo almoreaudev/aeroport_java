@@ -96,7 +96,7 @@ INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire,
 ('2023-05-11 09:00:00', '2023-05-11 12:00:00', 1300, 'Finit', 5000, '3h', 3, 'JFK', 'LHR', 'MOYEN'),
 ('2023-05-12 14:00:00', '2023-05-12 20:00:00', 10000, 'Finit', 45000, '9h', 4, 'JFK', 'DXB', 'LONG');
 
--- ajouter des vols après le 28 juin 2025
+-- ajouter des 15 vols après le 28 juin 2025
 INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire, duree, idAvion, codeAeroportDepart, codeAeroportArrivee, codeCategorieVol) VALUES
 ('2025-07-01 08:00:00', '2025-07-01 10:00:00', 500, 'A venir', 2000, '2h', 1, 'CDG', 'LHR', 'COURT'),
 ('2025-07-02 09:00:00', '2025-07-02 12:00:00', 1000, 'A venir', 4000, '3h', 2, 'CDG', 'JFK', 'MOYEN'),
@@ -113,6 +113,46 @@ INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire,
 ('2025-07-13 08:00:00', '2025-07-13 10:00:00', 500, 'A venir', 2000, '2h', 1, 'CDG', 'LHR', 'COURT'),
 ('2025-07-14 09:00:00', '2025-07-14 12:00:00', 1000, 'A venir', 4000, '3h', 2, 'CDG', 'JFK', 'MOYEN'),
 ('2025-07-15 14:00:00', '2025-07-15 20:00:00', 8000, 'A venir', 30000, '8h', 3, 'CDG', 'DXB', 'LONG');
+
+
+-- Ajouter 12 vols finit, un par mois de l'année 2024 (premier id28)
+INSERT INTO Vol (dateDepart, dateArrivee, distance, statut, carburantNecessaire, duree, idAvion, codeAeroportDepart, codeAeroportArrivee, codeCategorieVol) VALUES
+('2024-01-01 08:00:00', '2024-01-01 10:00:00', 500, 'Finit', 2000, '2h', 1, 'CDG', 'LHR', 'COURT'),
+('2024-02-01 09:00:00', '2024-02-01 12:00:00', 1000, 'Finit', 4000, '3h', 2, 'CDG', 'JFK', 'MOYEN'),
+('2024-03-01 14:00:00', '2024-03-01 20:00:00', 8000, 'Finit', 30000, '8h', 3, 'CDG', 'DXB', 'LONG'),
+('2024-04-01 11:00:00', '2024-04-01 13:30:00', 600, 'Finit', 2500, '2h30', 4, 'ORY', 'LHR', 'COURT'),
+('2024-05-01 15:00:00', '2024-05-01 18:00:00', 1200, 'Finit', 5000, '3h', 1, 'ORY', 'JFK', 'MOYEN'),
+('2024-06-01 07:00:00', '2024-06-01 15:00:00', 9000, 'Finit', 35000, '9h', 2, 'ORY', 'DXB', 'LONG'),
+('2024-07-01 10:00:00', '2024-07-01 12:30:00', 700, 'Finit', 3000, '2h30', 3, 'LHR', 'CDG', 'COURT'),
+('2024-08-01 13:00:00', '2024-08-01 16:00:00', 1100, 'Finit', 4500, '3h', 4, 'LHR', 'JFK', 'MOYEN'),
+('2024-09-01 16:00:00', '2024-09-01 22:00:00', 9500, 'Finit', 40000, '8h30', 1, 'LHR', 'DXB', 'LONG'),
+('2024-10-01 12:00:00', '2024-10-01 14:30:00', 800, 'Finit', 3500, '2h30', 2, 'JFK', 'CDG', 'COURT'),
+('2024-11-01 09:00:00', '2024-11-01 12:00:00', 1300, 'Finit', 5000, '3h', 3, 'JFK', 'LHR', 'MOYEN'),
+('2024-12-01 14:00:00', '2024-12-01 20:00:00', 10000, 'Finit', 45000, '9h', 4, 'JFK', 'DXB', 'LONG');
+
+-- Ajouter 3 billets par vol de l'année 2024 avec des totals de prix différents
+INSERT INTO Billet (idUtilisateur, idVol, codeCategorie, prenom, nom, prix) VALUES
+(1, 28, 'ADULTE', 'Alice', 'Dupont', 150.00),
+(1, 28, 'ETUDIANT', 'Pierre', 'Dupont', 120.00),
+(2, 29, 'ADULTE', 'Bob', 'Martin', 150.00),
+(3, 30, 'ENFANT', 'Charlie', 'Durand', 50.00),
+(1, 31, 'JEUNE_ADULTE', 'Alice', 'Dupont', 110.00),
+(2, 32, 'JEUNE', 'Bob', 'Martin', 90.00),
+(3, 33, 'SENIOR', 'Charlie', 'Durand', 100.00),
+(1, 34, 'ADULTE', 'Alice', 'Dupont', 150.00),
+(2, 35, 'ETUDIANT', 'Bob', 'Martin', 120.00),
+(3, 36, 'ENFANT', 'Charlie', 'Durand', 50.00),
+(1, 37, 'JEUNE_ADULTE', 'Alice', 'Dupont', 110.00),
+(2, 38, 'JEUNE', 'Bob', 'Martin', 90.00),
+(3, 39, 'SENIOR', 'Charlie', 'Durand', 100.00),
+(1, 40, 'ADULTE', 'Alice', 'Dupont', 150.00),
+(2, 40, 'ETUDIANT', 'Bob', 'Martin', 120.00),
+(3, 39, 'ENFANT', 'Charlie', 'Durand', 50.00),
+(1, 39, 'JEUNE_ADULTE', 'Alice', 'Dupont', 110.00),
+(2, 38, 'JEUNE', 'Bob', 'Martin', 90.00),
+(3, 37, 'SENIOR', 'Charlie', 'Durand', 100.00);
+
+
 -- a_comme_equipage
 INSERT INTO a_comme_equipage (idVol, idPersonnel) VALUES
 (1, 1), -- Vol 1 avec Pilote 1
@@ -246,11 +286,11 @@ INSERT INTO CategoriePassager (codeCategorie, libelle, tarif) VALUES
 ('ENFANT', 'Enfant (2-11 ans inclus)', 50.00);
 
 -- Utilisateur 
-INSERT INTO Utilisateur (nom, prenom, email, motDePasse, adresse, numPasseport, numCarteIdentite) VALUES
-('Moreau', 'Alexandre', 'alex@gmail.com', 'root', '6 impasse', '123456789', '987654321', TRUE),
-('Dupont', 'Alice', 'alice@gmail.com', 'password123', '123 Rue de Paris, Paris, France', 'P12345678', 'CI12345678'),
-('Martin', 'Bob', 'bob@free.fr', 'password456', '456 Avenue des Champs, Paris, France', 'P87654321', 'CI87654321'),
-('Durand', 'Charlie', 'charlie@gmail.com', 'password789', '789 Boulevard Saint-Germain, Paris, France', 'P11223344', 'CI11223344');
+INSERT INTO Utilisateur (nom, prenom, email, motDePasse, adresse, numPasseport, numCarteIdentite, superUtilisateur) VALUES
+('Dupont', 'Alice', 'alice@gmail.com', 'password123', '123 Rue de Paris, Paris, France', 'P12345678', 'CI12345678', FALSE),
+('Martin', 'Bob', 'bob@free.fr', 'password456', '456 Avenue des Champs, Paris, France', 'P87654321', 'CI87654321', FALSE),
+('Durand', 'Charlie', 'charlie@gmail.com', 'password789', '789 Boulevard Saint-Germain, Paris, France', 'P11223344', 'CI11223344', FALSE),
+('Moreau', 'Alexandre', 'alex@gmail.com', 'root', '6 impasse', '123456789', '987654321', TRUE);
 
 -- Facture
 INSERT INTO Facture (idUtilisateur, dateFacture, montantTotal) VALUES
