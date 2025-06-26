@@ -8,23 +8,17 @@ public class Personnel {
     private int idPersonnel;
     private String nom;
     private String prenom;
-    private LocalDate dateNaissance;
+    private String dateNaissance;
     private TypePersonnel codeType;
 
     public Personnel(int idPersonnel, String nom, String prenom, String dateNaissance, TypePersonnel codeType) {
         this.idPersonnel = idPersonnel;
         this.nom = nom;
         this.prenom = prenom;
-        this.dateNaissance = convertStringToDate(dateNaissance);
+        this.dateNaissance = dateNaissance;
         this.codeType = codeType;
     }
 
-    private LocalDate convertStringToDate(String strDate) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date = LocalDate.parse(strDate, formatter);
-
-        return date;
-    }
 
     public int getIdPersonnel() {
         return idPersonnel;
@@ -44,10 +38,10 @@ public class Personnel {
     public void setPrenom(String prenom) {
         this.prenom = prenom;
     }
-    public LocalDate getDateNaissance() {
+    public String getDateNaissance() {
         return dateNaissance;
     }
-    public void setDateNaissance(LocalDate dateNaissance) {
+    public void setDateNaissance(String dateNaissance) {
         this.dateNaissance = dateNaissance;
     }
     public TypePersonnel getCodeType() {
